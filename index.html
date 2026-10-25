@@ -1,0 +1,3075 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鬼話連篇：經典小說大冒險</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Serif TC & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        night: {
+                            950: '#0a0d18',
+                            900: '#111629',
+                            800: '#1c2442',
+                            700: '#29345c',
+                        },
+                        parchment: {
+                            50: '#fdfaf3',
+                            100: '#f9f1df',
+                            200: '#efe0be',
+                            800: '#4a3b28',
+                            900: '#2e2418',
+                        },
+                        cinnabar: {
+                            500: '#d93829',
+                            600: '#b8281b',
+                            700: '#911c12',
+                        },
+                        jade: {
+                            400: '#38d399',
+                            500: '#10b981',
+                            600: '#059669',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            background-color: #0a0d18;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(217, 56, 41, 0.12) 0%, transparent 35%),
+                radial-gradient(circle at 85% 30%, rgba(56, 211, 153, 0.10) 0%, transparent 40%),
+                radial-gradient(circle at 50% 85%, rgba(245, 158, 11, 0.10) 0%, transparent 45%);
+            color: #fdfaf3;
+            overflow-x: hidden;
+        }
+
+        .oriental-card {
+            background: linear-gradient(145deg, rgba(28, 36, 66, 0.92), rgba(17, 22, 41, 0.96));
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .oriental-card:hover {
+            border-color: rgba(251, 191, 36, 0.65);
+            box-shadow: 0 14px 35px -5px rgba(245, 158, 11, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .parchment-panel {
+            background: linear-gradient(180deg, #fdfaf3 0%, #f5e8c8 100%);
+            color: #2e2418;
+            border: 2px solid #d97706;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+        }
+
+        @keyframes lanternSwing {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        .lantern-swing {
+            animation: lanternSwing 4s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translateY(0px) scale(1); opacity: 0.75; }
+            50% { transform: translateY(-8px) scale(1.08); opacity: 1; }
+        }
+        .spirit-orb {
+            animation: floatOrb 3.2s ease-in-out infinite;
+        }
+
+        .btn-game {
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 0 #92400e, 0 6px 15px rgba(0,0,0,0.4);
+        }
+        .btn-game:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #92400e, 0 2px 6px rgba(0,0,0,0.4);
+        }
+
+        .btn-cinnabar {
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 0 #7f1d1d, 0 6px 15px rgba(0,0,0,0.4);
+        }
+        .btn-cinnabar:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #7f1d1d, 0 2px 6px rgba(0,0,0,0.4);
+        }
+
+        @keyframes sealStamp {
+            0% { transform: scale(2.6) rotate(-18deg); opacity: 0; }
+            60% { transform: scale(0.92) rotate(-10deg); opacity: 1; }
+            80% { transform: scale(1.04) rotate(-12deg); opacity: 1; }
+            100% { transform: scale(1) rotate(-12deg); opacity: 1; }
+        }
+        .seal-badge {
+            border: 3px double #ef4444;
+            color: #fca5a5;
+            background: rgba(127, 29, 29, 0.88);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.45), inset 0 0 6px rgba(239, 68, 68, 0.35);
+            transform: rotate(-12deg);
+            letter-spacing: 0.15em;
+        }
+        .seal-stamp-anim {
+            animation: sealStamp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* 開場動畫與首頁特效 */
+        @keyframes introDoorLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-105%); }
+        }
+        @keyframes introDoorRight {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(105%); }
+        }
+        @keyframes introFadeUp {
+            0% { opacity: 0; transform: translateY(24px) scale(0.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.35), 0 0 30px rgba(217, 56, 41, 0.2); }
+            50% { box-shadow: 0 0 28px rgba(251, 191, 36, 0.75), 0 0 50px rgba(217, 56, 41, 0.4); }
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) translateX(0) scale(0.5); opacity: 0; }
+            20% { opacity: 0.75; }
+            80% { opacity: 0.65; }
+            100% { transform: translateY(-15vh) translateX(30px) scale(1.2); opacity: 0; }
+        }
+        .intro-door-open-left {
+            animation: introDoorLeft 1.2s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+        }
+        .intro-door-open-right {
+            animation: introDoorRight 1.2s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+        }
+        .intro-fade-up-1 {
+            animation: introFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+        }
+        .intro-fade-up-2 {
+            animation: introFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+        }
+        .intro-fade-up-3 {
+            animation: introFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.75s both;
+        }
+        .btn-pulse-glow {
+            animation: pulseGlow 2.4s infinite ease-in-out;
+        }
+        .firefly-particle {
+            position: absolute;
+            border-radius: 9999px;
+            pointer-events: none;
+            animation: floatParticle linear infinite;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-gold-500 selection:text-night-950">
+
+    <!-- 開場古風卷軸動畫遮罩層 -->
+    <div id="intro-splash-overlay" class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
+        <!-- 左扇古門 -->
+        <div id="intro-door-left" class="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-night-950 via-night-900 to-night-800 border-r-2 border-gold-500/60 z-10 flex items-center justify-end pr-6 sm:pr-12 shadow-2xl">
+            <div class="w-12 h-32 rounded-l-full border-2 border-r-0 border-gold-500/40 flex items-center justify-center">
+                <span class="text-2xl text-gold-400/70">🏮</span>
+            </div>
+        </div>
+        <!-- 右扇古門 -->
+        <div id="intro-door-right" class="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-night-950 via-night-900 to-night-800 border-l-2 border-gold-500/60 z-10 flex items-center justify-start pl-6 sm:pl-12 shadow-2xl">
+            <div class="w-12 h-32 rounded-r-full border-2 border-l-0 border-gold-500/40 flex items-center justify-center">
+                <span class="text-2xl text-gold-400/70">🏮</span>
+            </div>
+        </div>
+
+        <!-- 中央開場卷軸內容 -->
+        <div id="intro-center-box" class="relative z-20 max-w-lg w-full mx-4 oriental-card rounded-3xl p-7 sm:p-10 border-2 border-gold-400 text-center space-y-6 shadow-2xl">
+            <div class="flex justify-center items-center gap-5 intro-fade-up-1">
+                <span class="text-4xl sm:text-5xl lantern-swing inline-block">🏮</span>
+                <span class="text-3xl sm:text-4xl spirit-orb inline-block">🔥</span>
+                <span class="text-4xl sm:text-5xl lantern-swing inline-block" style="animation-delay: 1.2s;">🏮</span>
+            </div>
+
+            <div class="space-y-3 intro-fade-up-2">
+                <div class="inline-block px-4 py-1 rounded-full bg-jade-500/20 text-jade-300 border border-jade-400/50 text-xs sm:text-sm font-bold tracking-widest">
+                    ✨ 鬼話連篇桌遊互動學習平台 ✨
+                </div>
+                <h1 class="font-serif font-black text-3xl sm:text-5xl text-gold-400 tracking-wider leading-tight drop-shadow">
+                    鬼話連篇<br>
+                    <span class="text-xl sm:text-3xl text-parchment-50">經典小說大冒險</span>
+                </h1>
+                <p class="text-xs sm:text-sm text-parchment-200/90 font-serif tracking-widest pt-1">
+                    「夜半燈火明，古卷映人心；六篇奇譚啟，邀君入書林。」
+                </p>
+                <div class="pt-1">
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-xl bg-amber-500/20 text-gold-300 border border-gold-400/50 text-xs sm:text-sm font-serif font-bold">
+                        <i class="ph-fill ph-pen-nib text-gold-400"></i>
+                        <span>設計者：蔡金錠老師</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="space-y-3 pt-2 intro-fade-up-3">
+                <button type="button" onclick="enterFromSplash(true)" class="btn-game btn-pulse-glow w-full bg-gradient-to-r from-gold-500 to-amber-600 text-night-950 font-serif font-black py-3.5 px-6 rounded-2xl text-base sm:text-lg flex items-center justify-center gap-2">
+                    <i class="ph-fill ph-music-notes-simple text-xl"></i>
+                    <span>展卷入席（開啟背景音樂）</span>
+                </button>
+                <div class="flex justify-center">
+                    <button type="button" onclick="enterFromSplash(false)" class="w-full py-2.5 px-4 rounded-xl bg-night-950/80 hover:bg-night-800 text-parchment-200 border border-gold-500/30 text-xs font-serif font-bold transition">
+                        靜音進入首頁
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 專屬背景音樂控制列（僅在「首頁」與「五大目錄區」顯示） -->
+    <div id="bgm-floating-bar" class="fixed top-3 right-3 sm:top-4 sm:right-5 z-50 flex items-center gap-2">
+        <audio id="bgm-audio-player" src="Untitled_2.mp3" loop preload="auto"></audio>
+        <button type="button" id="bgm-toggle-btn" onclick="toggleBgmPlayback()" class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-night-900/95 hover:bg-night-800 text-gold-300 border-2 border-gold-500/60 shadow-xl backdrop-blur-md transition text-xs sm:text-sm font-serif font-bold">
+            <span id="bgm-icon-wrap" class="text-base">🔇</span>
+            <span id="bgm-status-text">音樂：關閉</span>
+        </button>
+    </div>
+
+    <!-- 第一頁：首頁大標題與登入系統 -->
+    <div id="view-landing" class="min-h-screen flex flex-col items-center justify-center px-4 py-10 relative overflow-hidden">
+        <!-- 首頁背景漂浮螢光粒子動畫 -->
+        <div id="landing-particles" class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+            <div class="firefly-particle w-2 h-2 bg-gold-400/60 left-[12%]" style="animation-duration: 9s; animation-delay: 0s;"></div>
+            <div class="firefly-particle w-3 h-3 bg-jade-400/50 left-[28%]" style="animation-duration: 12s; animation-delay: 2s;"></div>
+            <div class="firefly-particle w-2 h-2 bg-amber-400/60 left-[48%]" style="animation-duration: 10s; animation-delay: 4s;"></div>
+            <div class="firefly-particle w-2.5 h-2.5 bg-cinnabar-500/50 left-[68%]" style="animation-duration: 11s; animation-delay: 1s;"></div>
+            <div class="firefly-particle w-2 h-2 bg-gold-400/70 left-[84%]" style="animation-duration: 8.5s; animation-delay: 3s;"></div>
+        </div>
+
+        <div id="landing-main-card" class="relative z-10 max-w-xl w-full oriental-card rounded-3xl p-6 sm:p-10 border-2 border-gold-500/60 shadow-2xl space-y-6 text-center overflow-hidden">
+            <div class="flex justify-center items-center gap-4">
+                <span class="text-4xl sm:text-5xl lantern-swing inline-block">🏮</span>
+                <span class="text-3xl spirit-orb inline-block">🔥</span>
+                <span class="text-4xl sm:text-5xl lantern-swing inline-block" style="animation-delay: 1.5s;">🏮</span>
+            </div>
+
+            <div class="space-y-3">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-jade-500/20 text-jade-300 border-2 border-jade-500/50 text-sm sm:text-base font-bold tracking-widest shadow-md">
+                    ✨ 鬼話連篇桌遊互動學習平台 ✨
+                </div>
+                <h1 class="font-serif font-black text-3xl sm:text-5xl text-gold-400 tracking-wider leading-tight drop-shadow">
+                    鬼話連篇<br>
+                    <span class="text-2xl sm:text-3xl text-parchment-50">經典小說大冒險</span>
+                </h1>
+                <p class="text-xs sm:text-sm text-parchment-200/80 pt-1">
+                    《白蛇傳》・《定伯賣鬼》・《倩女幽魂》・《畫皮》・《西遊記》・《桃太郎》
+                </p>
+                <div class="pt-2">
+                    <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-gradient-to-r from-amber-500/25 to-gold-500/25 text-gold-300 border-2 border-gold-400/60 text-sm sm:text-base font-serif font-black shadow-lg">
+                        <i class="ph-fill ph-pen-nib text-lg text-gold-400"></i>
+                        <span>設計者：蔡金錠老師</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 學生登入表單 -->
+            <div class="bg-night-950/85 p-5 sm:p-6 rounded-2xl border border-gold-500/30 text-left space-y-4">
+                <div class="flex items-center justify-between border-b border-gold-500/20 pb-2.5">
+                    <h2 class="font-serif font-bold text-base sm:text-lg text-gold-400 flex items-center gap-2">
+                        <i class="ph-fill ph-user-circle-gear text-xl"></i>
+                        <span>冒險者通行證登入</span>
+                    </h2>
+                    <span class="text-[11px] text-jade-400">本機自動保存進度</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-parchment-200 mb-1">班級／稱號（選填）</label>
+                        <input type="text" id="login-class-input" placeholder="例如：801班 或 蘭若書生" class="w-full bg-night-900 text-parchment-50 px-3.5 py-2.5 rounded-xl border border-gold-500/40 focus:outline-none focus:border-gold-400 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-parchment-200 mb-1">姓名／暱稱 <span class="text-rose-400">*</span></label>
+                        <input type="text" id="login-name-input" placeholder="請輸入姓名或暱稱" class="w-full bg-night-900 text-parchment-50 px-3.5 py-2.5 rounded-xl border border-gold-500/40 focus:outline-none focus:border-gold-400 text-sm">
+                    </div>
+                </div>
+
+                <div id="returning-user-hint" class="hidden text-xs text-amber-300 bg-amber-950/50 px-3 py-2 rounded-lg border border-amber-500/30 flex items-center justify-between">
+                    <span id="returning-user-text">歡迎回來！</span>
+                    <span class="underline cursor-pointer" onclick="handleUserLogin()">直接進入 ➔</span>
+                </div>
+
+                <div class="pt-1 flex flex-col sm:flex-row gap-2.5">
+                    <button type="button" onclick="handleUserLogin()" class="btn-game flex-1 bg-gradient-to-r from-gold-500 to-amber-600 text-night-950 font-serif font-black py-3 px-6 rounded-xl text-base flex items-center justify-center gap-2">
+                        <i class="ph-bold ph-sign-in text-xl"></i>
+                        <span>登入並進入冒險目錄</span>
+                    </button>
+                    <button type="button" onclick="handleGuestLogin()" class="bg-night-800 hover:bg-night-700 text-parchment-200 font-serif font-bold py-3 px-4 rounded-xl text-xs sm:text-sm border border-gold-500/30 transition">
+                        訪客直接體驗
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-[11px] text-parchment-200/60 flex items-center justify-center gap-4">
+                <span>✨ 免密碼快速通行</span>
+                <span>📚 內建故事參考秘笈</span>
+                <button type="button" onclick="replayIntroAnimation()" class="text-jade-400 underline hover:text-jade-300">重播開場動畫</button>
+                <button type="button" onclick="openStorageModal()" class="text-gold-400 underline hover:text-gold-300">進度保存說明</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 頂部狀態與導覽列 -->
+    <header id="app-header" class="hidden sticky top-0 z-40 bg-night-900/95 backdrop-blur-md border-b border-gold-500/30 shadow-lg">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="goToMenuView()" title="點擊返回五大功能目錄頁">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cinnabar-500 to-amber-600 flex items-center justify-center shadow-md border border-gold-400 lantern-swing">
+                        <span class="text-2xl">🏮</span>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <h1 class="font-serif font-black text-lg sm:text-xl text-gold-400 tracking-wider">鬼話連篇桌遊互動學習平台</h1>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/50 font-serif font-bold">
+                                設計者：蔡金錠老師
+                            </span>
+                            <span id="user-badge-display" class="text-xs px-2.5 py-0.5 rounded-full bg-jade-500/20 text-jade-300 border border-jade-500/40 font-bold">
+                                👤 冒險者
+                            </span>
+                        </div>
+                        <p id="next-goal-banner" class="text-xs text-parchment-200/80 truncate max-w-[260px] sm:max-w-md mt-0.5">
+                            📍 目前指引：探索六篇經典小說，收集鬼話能量！
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <button type="button" onclick="goToMenuView()" id="header-back-menu-btn" class="hidden sm:inline-flex items-center gap-1.5 bg-gold-500/20 hover:bg-gold-500/30 text-gold-300 border border-gold-400/50 px-3 py-1.5 rounded-xl text-xs font-serif font-bold transition">
+                        <i class="ph-bold ph-squares-four text-base"></i>
+                        <span>回五館目錄頁</span>
+                    </button>
+
+                    <div class="flex items-center gap-2 bg-night-800 px-3 py-1.5 rounded-full border border-jade-500/40 shadow-inner" title="答題、闖關與創作皆可獲得鬼話能量">
+                        <span class="text-lg spirit-orb">🔥</span>
+                        <div class="text-xs">
+                            <span class="text-parchment-200/70 block leading-none">鬼話能量</span>
+                            <span id="energy-display" class="font-bold text-jade-400 text-sm sm:text-base">0</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 bg-night-800 px-3 py-1.5 rounded-full border border-gold-500/40 cursor-pointer hover:bg-night-700 transition" onclick="switchTab('achievements')">
+                        <span class="text-lg">🏅</span>
+                        <div class="text-xs">
+                            <span class="text-parchment-200/70 block leading-none">總完成度</span>
+                            <span id="overall-progress-display" class="font-bold text-gold-400 text-sm sm:text-base">0%</span>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="openStorageModal()" class="p-2 rounded-full bg-night-800 hover:bg-night-700 text-parchment-200 border border-gold-500/30 transition" title="查看進度保存方式與管理資料">
+                        <i class="ph ph-floppy-disk text-lg text-gold-400"></i>
+                    </button>
+
+                    <button type="button" onclick="goToLandingView()" class="p-2 rounded-full bg-night-800 hover:bg-night-700 text-parchment-200 border border-gold-500/30 transition" title="返回首頁標題／切換登入身分">
+                        <i class="ph ph-sign-out text-lg text-rose-400"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 第二頁：次頁五大功能目錄頁 -->
+    <div id="view-menu" class="hidden flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 space-y-6">
+        <div class="oriental-card rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-l-4 border-l-gold-500">
+            <div class="space-y-1">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/40">
+                        🗺️ 鬼話連篇桌遊互動學習平台・冒險總目錄
+                    </span>
+                    <span class="text-xs font-serif font-bold px-2.5 py-0.5 rounded-full bg-jade-500/20 text-jade-300 border border-jade-500/40">
+                        ✒️ 設計者：蔡金錠老師
+                    </span>
+                </div>
+                <h2 id="menu-welcome-title" class="text-xl sm:text-2xl font-serif font-black text-parchment-50">
+                    歡迎來到鬼話連篇大冒險，請選擇欲前往的主題館！
+                </h2>
+                <p class="text-xs sm:text-sm text-parchment-200/80">
+                    可依序由「一、經典小說館」開始挑戰，或自由點選任一館別探索。所有進度皆會自動儲存。
+                </p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+                <button type="button" onclick="openSecretBookModal('baishe')" class="px-3.5 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-serif font-bold flex items-center gap-1.5 transition">
+                    <i class="ph-fill ph-book-open-text text-base"></i>
+                    <span>翻閱故事參考秘笈</span>
+                </button>
+                <button type="button" onclick="goToLandingView()" class="px-3.5 py-2 rounded-xl bg-night-950 hover:bg-night-800 text-parchment-200 border border-gold-500/30 text-xs font-bold flex items-center gap-1.5 transition">
+                    <i class="ph-bold ph-house"></i>
+                    <span>回首頁登入畫面</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- 目錄 1：經典小說館 -->
+            <div onclick="switchTab('hall')" class="oriental-card rounded-2xl p-6 cursor-pointer group flex flex-col justify-between space-y-4 border-t-4 border-t-gold-500">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-serif font-bold px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/40">目錄壹</span>
+                        <span class="text-3xl group-hover:scale-110 transition">📚</span>
+                    </div>
+                    <h3 class="font-serif font-black text-xl text-gold-400">一、經典小說館</h3>
+                    <p class="text-xs sm:text-sm text-parchment-200/85 leading-relaxed">
+                        收錄六大經典篇章與清爽人物卡，提供隨時可查閱的「故事參考秘笈」，挑戰人物辨識、關鍵情節、人物關係與閱讀推理四大任務！
+                    </p>
+                </div>
+                <div class="pt-3 border-t border-gold-500/20 flex items-center justify-between text-xs">
+                    <span id="menu-stat-hall" class="text-jade-400 font-bold">通關進度：0 / 6 篇</span>
+                    <span class="font-serif font-bold text-gold-400 group-hover:translate-x-1 transition">進入本館 ➔</span>
+                </div>
+            </div>
+
+            <!-- 目錄 2：故事山闖關 -->
+            <div onclick="switchTab('mountain')" class="oriental-card rounded-2xl p-6 cursor-pointer group flex flex-col justify-between space-y-4 border-t-4 border-t-jade-500">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-serif font-bold px-3 py-1 rounded-full bg-jade-500/20 text-jade-300 border border-jade-500/40">目錄貳</span>
+                        <span class="text-3xl group-hover:scale-110 transition">⛰️</span>
+                    </div>
+                    <h3 class="font-serif font-black text-xl text-jade-400">二、故事山闖關</h3>
+                    <p class="text-xs sm:text-sm text-parchment-200/85 leading-relaxed">
+                        將隨機打亂的劇情卡牌，透過拖曳或點選放入「開端、發展、高潮、結局、主題與反思」五個階段，掌握小說結構脈絡！
+                    </p>
+                </div>
+                <div class="pt-3 border-t border-gold-500/20 flex items-center justify-between text-xs">
+                    <span id="menu-stat-mountain" class="text-jade-400 font-bold">攀登進度：0 / 6 座</span>
+                    <span class="font-serif font-bold text-gold-400 group-hover:translate-x-1 transition">進入本館 ➔</span>
+                </div>
+            </div>
+
+            <!-- 目錄 3：劇情異世界 -->
+            <div onclick="switchTab('multiverse')" class="oriental-card rounded-2xl p-6 cursor-pointer group flex flex-col justify-between space-y-4 border-t-4 border-t-cinnabar-500">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-serif font-bold px-3 py-1 rounded-full bg-cinnabar-500/20 text-rose-300 border border-cinnabar-500/40">目錄參</span>
+                        <span class="text-3xl group-hover:scale-110 transition">🌀</span>
+                    </div>
+                    <h3 class="font-serif font-black text-xl text-rose-400">三、劇情異世界</h3>
+                    <p class="text-xs sm:text-sm text-parchment-200/85 leading-relaxed">
+                        如果當時主角做出不同選擇會如何？清楚對照「原作正史路線」與「創意假設情境」，深入思考人物動機與事件因果！
+                    </p>
+                </div>
+                <div class="pt-3 border-t border-gold-500/20 flex items-center justify-between text-xs">
+                    <span id="menu-stat-multiverse" class="text-jade-400 font-bold">已探索：0 / 18 分支</span>
+                    <span class="font-serif font-bold text-gold-400 group-hover:translate-x-1 transition">進入本館 ➔</span>
+                </div>
+            </div>
+
+            <!-- 目錄 4：鬼話創作工坊 -->
+            <div onclick="switchTab('workshop')" class="oriental-card rounded-2xl p-6 cursor-pointer group flex flex-col justify-between space-y-4 border-t-4 border-t-amber-400">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-serif font-bold px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">目錄肆</span>
+                        <span class="text-3xl group-hover:scale-110 transition">✒️</span>
+                    </div>
+                    <h3 class="font-serif font-black text-xl text-amber-400">四、鬼話創作工坊</h3>
+                    <p class="text-xs sm:text-sm text-parchment-200/85 leading-relaxed">
+                        抽取「人物、場景、事件、轉折」四張靈感卡，依循故事山五階段引導自由創作，產出專屬古風故事成果卡與多元回饋！
+                    </p>
+                </div>
+                <div class="pt-3 border-t border-gold-500/20 flex items-center justify-between text-xs">
+                    <span id="menu-stat-workshop" class="text-jade-400 font-bold">已完成作品：0 篇</span>
+                    <span class="font-serif font-bold text-gold-400 group-hover:translate-x-1 transition">進入本館 ➔</span>
+                </div>
+            </div>
+
+            <!-- 目錄 5：成就與回饋 -->
+            <div onclick="switchTab('achievements')" class="oriental-card rounded-2xl p-6 cursor-pointer group flex flex-col justify-between space-y-4 border-t-4 border-t-purple-400 md:col-span-2 lg:col-span-2">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-serif font-bold px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/40">目錄伍</span>
+                        <span class="text-3xl group-hover:scale-110 transition">🏆</span>
+                    </div>
+                    <h3 class="font-serif font-black text-xl text-purple-300">五、成就與回饋總覽</h3>
+                    <p class="text-xs sm:text-sm text-parchment-200/85 leading-relaxed">
+                        檢視累計獲得的「鬼話能量」、12 枚專屬成就徽章、六篇經典文本掌握度，以及你在鬼話創作工坊保存的所有原創作品集與回饋紀錄！
+                    </p>
+                </div>
+                <div class="pt-3 border-t border-gold-500/20 flex items-center justify-between text-xs">
+                    <span id="menu-stat-achievements" class="text-jade-400 font-bold">已解鎖徽章：0 / 12 枚</span>
+                    <span class="font-serif font-bold text-gold-400 group-hover:translate-x-1 transition">進入本館 ➔</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第三層：五大功能館主內容區 -->
+    <main id="view-feature" class="hidden flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 py-5 space-y-5">
+        <div class="bg-night-900/90 border border-gold-500/30 rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2 shadow-md">
+            <div class="flex flex-wrap items-center gap-2">
+                <button type="button" onclick="handleBackPreviousPage()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-night-950 hover:bg-night-800 text-gold-400 border border-gold-500/40 font-serif font-bold text-xs sm:text-sm transition">
+                    <i class="ph-bold ph-arrow-left"></i>
+                    <span id="back-prev-btn-text">返回上一頁</span>
+                </button>
+                <button type="button" onclick="goToMenuView()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gold-500/15 hover:bg-gold-500/25 text-parchment-100 border border-gold-500/30 font-serif font-bold text-xs sm:text-sm transition">
+                    <i class="ph-bold ph-squares-four text-gold-400"></i>
+                    <span>返回五館目錄頁</span>
+                </button>
+            </div>
+
+            <nav class="flex items-center gap-1.5 overflow-x-auto py-0.5 no-scrollbar">
+                <button type="button" onclick="switchTab('hall')" id="tab-btn-hall" class="tab-btn flex items-center gap-1 px-3 py-1.5 rounded-xl font-serif font-bold text-xs whitespace-nowrap transition-all">
+                    <span>一、小說館</span>
+                </button>
+                <button type="button" onclick="switchTab('mountain')" id="tab-btn-mountain" class="tab-btn flex items-center gap-1 px-3 py-1.5 rounded-xl font-serif font-bold text-xs whitespace-nowrap transition-all">
+                    <span>二、故事山</span>
+                </button>
+                <button type="button" onclick="switchTab('multiverse')" id="tab-btn-multiverse" class="tab-btn flex items-center gap-1 px-3 py-1.5 rounded-xl font-serif font-bold text-xs whitespace-nowrap transition-all">
+                    <span>三、異世界</span>
+                </button>
+                <button type="button" onclick="switchTab('workshop')" id="tab-btn-workshop" class="tab-btn flex items-center gap-1 px-3 py-1.5 rounded-xl font-serif font-bold text-xs whitespace-nowrap transition-all">
+                    <span>四、創作坊</span>
+                </button>
+                <button type="button" onclick="switchTab('achievements')" id="tab-btn-achievements" class="tab-btn flex items-center gap-1 px-3 py-1.5 rounded-xl font-serif font-bold text-xs whitespace-nowrap transition-all">
+                    <span>五、成就館</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- 功能一：經典小說館 -->
+        <section id="section-hall" class="tab-section space-y-6">
+            <div class="oriental-card rounded-2xl p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-l-4 border-l-gold-500">
+                <div class="space-y-1">
+                    <div class="inline-flex items-center gap-2 text-xs font-bold text-gold-400 bg-gold-500/10 px-2.5 py-1 rounded-md border border-gold-500/30">
+                        <span>📖 原作閱讀理解專區</span>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-serif font-bold text-parchment-50">六大經典小說與人物卡</h2>
+                    <p class="text-sm text-parchment-200/80 leading-relaxed">
+                        每篇皆展示<strong>標題與登場人物卡</strong>。點選<strong>「📖 故事參考秘笈」</strong>可隨時查閱完整情節與人物關係，答題時亦可打開秘笈參考！
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 self-start md:self-center shrink-0">
+                    <button type="button" onclick="openSecretBookModal('baishe')" class="btn-game bg-amber-500 hover:bg-amber-400 text-night-950 font-serif font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-1.5">
+                        <i class="ph-fill ph-book-bookmark text-lg"></i>
+                        <span>開啟故事參考秘笈</span>
+                    </button>
+                    <div class="flex items-center gap-2 bg-night-950/70 px-3.5 py-2 rounded-xl border border-gold-500/30">
+                        <div class="text-right">
+                            <div class="text-[11px] text-parchment-200/70">小說館通關</div>
+                            <div id="hall-progress-count" class="text-base font-serif font-bold text-gold-400">0 / 6 篇</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="hall-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+            <div id="hall-mission-panel" class="hidden space-y-5"></div>
+        </section>
+
+        <!-- 功能二：故事山闖關 -->
+        <section id="section-mountain" class="tab-section hidden space-y-6">
+            <div class="oriental-card rounded-2xl p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-l-4 border-l-jade-500">
+                <div class="space-y-1">
+                    <div class="inline-flex items-center gap-2 text-xs font-bold text-jade-400 bg-jade-500/10 px-2.5 py-1 rounded-md border border-jade-500/30">
+                        <span>⛰️ 結構分析與卡牌配置</span>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-serif font-bold text-parchment-50">故事山五階段結構挑戰</h2>
+                    <p class="text-sm text-parchment-200/80 leading-relaxed">
+                        將隨機打亂的劇情卡牌，透過<strong>滑鼠拖曳</strong>或<strong>點選卡牌再點選格子</strong>放入「開端、發展、高潮、結局、主題與反思」五個階段！
+                    </p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button type="button" onclick="openSecretBookModal(appState.activeMountainStoryId)" class="px-3.5 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-serif font-bold flex items-center gap-1.5 transition">
+                        <i class="ph-fill ph-book-open-text"></i>
+                        <span>查看本篇秘笈</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mountain-story-tabs" class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar"></div>
+            <div id="mountain-game-container" class="space-y-5"></div>
+        </section>
+
+        <!-- 功能三：劇情異世界 -->
+        <section id="section-multiverse" class="tab-section hidden space-y-6">
+            <div class="oriental-card rounded-2xl p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-l-4 border-l-cinnabar-500">
+                <div class="space-y-1">
+                    <div class="inline-flex items-center gap-2 text-xs font-bold text-rose-400 bg-cinnabar-500/10 px-2.5 py-1 rounded-md border border-cinnabar-500/30">
+                        <span>🌀 原作正史 vs 假設情境對照</span>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-serif font-bold text-parchment-50">關鍵抉擇：如果當時主角這麼做？</h2>
+                    <p class="text-sm text-parchment-200/80 leading-relaxed">
+                        體驗每個關鍵轉折點的<strong>【原作正史路線】</strong>與<strong>【創意假設情境】</strong>，比較人物性格如何決定命運走向！
+                    </p>
+                </div>
+                <button type="button" onclick="openSecretBookModal(appState.activeMultiverseStoryId)" class="px-3.5 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-serif font-bold flex items-center gap-1.5 self-start md:self-center">
+                    <i class="ph-fill ph-book-open-text"></i>
+                    <span>翻閱原作秘笈</span>
+                </button>
+            </div>
+
+            <div id="multiverse-story-tabs" class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar"></div>
+            <div id="multiverse-content-container" class="space-y-5"></div>
+        </section>
+
+        <!-- 功能四：鬼話創作工坊 -->
+        <section id="section-workshop" class="tab-section hidden space-y-6">
+            <div class="oriental-card rounded-2xl p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-l-4 border-l-amber-400">
+                <div class="space-y-1">
+                    <div class="inline-flex items-center gap-2 text-xs font-bold text-amber-300 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/30">
+                        <span>✒️ 桌遊抽卡 × 五階段故事創作</span>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-serif font-bold text-parchment-50">鬼話創作工坊：撰寫你的奇幻傳奇</h2>
+                    <p class="text-sm text-parchment-200/80 leading-relaxed">
+                        抽取或自選<strong>「人物卡、場景卡、事件卡、轉折卡」</strong>，沿著故事山五階段引導寫下你的奇幻故事，生成專屬故事成果卡！
+                    </p>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <button type="button" onclick="drawAllWorkshopCards()" class="btn-game bg-gradient-to-r from-gold-500 to-amber-600 text-night-950 font-serif font-bold px-4 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-1.5">
+                        <i class="ph-bold ph-shuffle text-base"></i>
+                        <span>隨機重抽四張靈感卡</span>
+                    </button>
+                    <button type="button" onclick="openWorkshopResetModal()" class="px-3 py-2 rounded-xl bg-night-800 hover:bg-night-700 text-parchment-200 border border-gold-500/30 text-xs font-bold">
+                        清空重寫
+                    </button>
+                </div>
+            </div>
+
+            <div id="workshop-container" class="space-y-6"></div>
+        </section>
+
+        <!-- 功能五：成就與回饋總覽 -->
+        <section id="section-achievements" class="tab-section hidden space-y-6">
+            <div id="achievements-container" class="space-y-6"></div>
+        </section>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="mt-auto border-t border-gold-500/20 bg-night-950/90 py-4 px-4 text-center text-xs text-parchment-200/80">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <span class="font-serif font-bold text-gold-400">🏮 鬼話連篇桌遊互動學習平台 —《鬼話連篇：經典小說大冒險》｜ 設計者：蔡金錠老師</span>
+            <div class="flex items-center gap-4">
+                <button type="button" onclick="goToMenuView()" class="hover:text-gold-400 underline">返回五館目錄頁</button>
+                <button type="button" onclick="openSecretBookModal('baishe')" class="hover:text-gold-400 underline">開啟故事參考秘笈</button>
+                <button type="button" onclick="openStorageModal()" class="hover:text-gold-400 underline">本機存檔管理</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 全域浮動通知 Toast -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+    <!-- 進度保存說明與重設 Modal -->
+    <div id="storage-modal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="oriental-card rounded-2xl max-w-lg w-full p-6 space-y-4 border-2 border-gold-500">
+            <div class="flex items-center justify-between border-b border-gold-500/30 pb-3">
+                <h3 class="font-serif font-bold text-lg text-gold-400 flex items-center gap-2">
+                    <i class="ph-fill ph-floppy-disk text-xl"></i>
+                    <span>學習進度保存與管理</span>
+                </h3>
+                <button type="button" onclick="closeStorageModal()" class="text-parchment-200 hover:text-white">
+                    <i class="ph-bold ph-x text-lg"></i>
+                </button>
+            </div>
+            <div class="space-y-3 text-xs sm:text-sm text-parchment-100 leading-relaxed">
+                <p>📌 <strong>自動保存機制：</strong>本應用程式使用瀏覽器內建的 <code>localStorage</code> 技術。您的<strong>登入身分、小說館答題紀錄、故事山通關、異世界探索、鬼話能量與創作作品</strong>皆會即時自動儲存在目前使用的裝置與瀏覽器中。</p>
+                <p>💡 <strong>溫馨提醒：</strong>若使用無痕視窗或清除瀏覽器快取，紀錄將會重置。建議於作品完成後使用「複製全文」功能備份您的精彩故事！</p>
+            </div>
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-gold-500/20">
+                <button type="button" onclick="resetAllProgress()" class="px-3.5 py-2 rounded-xl bg-cinnabar-600/30 hover:bg-cinnabar-600 text-rose-200 hover:text-white border border-cinnabar-500 text-xs font-bold transition">
+                    清除本機所有紀錄
+                </button>
+                <button type="button" onclick="closeStorageModal()" class="btn-game bg-gold-500 text-night-950 font-serif font-bold px-5 py-2 rounded-xl text-xs sm:text-sm">
+                    我知道了
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 創作工坊重設確認 Modal -->
+    <div id="workshop-reset-modal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="oriental-card rounded-2xl max-w-md w-full p-6 space-y-4 border-2 border-amber-500">
+            <h3 class="font-serif font-bold text-lg text-amber-400 flex items-center gap-2">
+                <i class="ph-fill ph-warning-circle text-xl"></i>
+                <span>重新開始創作確認</span>
+            </h3>
+            <p class="text-sm text-parchment-100 leading-relaxed">
+                確定要清空目前填寫的故事草稿並重新抽卡嗎？（您先前已經產出並保存於「成就與回饋」中的作品紀錄不會受到影響。）
+            </p>
+            <div class="flex justify-end gap-3 pt-2">
+                <button type="button" onclick="closeWorkshopResetModal()" class="px-4 py-2 rounded-xl bg-night-800 text-parchment-200 text-sm hover:bg-night-700">保留目前草稿</button>
+                <button type="button" onclick="confirmWorkshopReset()" class="btn-cinnabar px-4 py-2 rounded-xl bg-cinnabar-600 text-white text-sm font-bold">確定清空重寫</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 單篇完成封印動畫 Modal -->
+    <div id="seal-complete-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="oriental-card rounded-3xl max-w-md w-full p-6 sm:p-8 text-center space-y-5 border-2 border-cinnabar-500 shadow-2xl relative overflow-hidden">
+            <div class="inline-block px-5 py-2 rounded-xl seal-badge seal-stamp-anim font-serif font-black text-2xl sm:text-3xl">
+                【試煉封印完成】
+            </div>
+            <div class="space-y-2 pt-2">
+                <div id="seal-modal-icon" class="text-5xl">🐍</div>
+                <h3 id="seal-modal-title" class="font-serif font-black text-2xl text-gold-400">《白蛇傳》全數通關！</h3>
+                <p class="text-xs sm:text-sm text-parchment-100 leading-relaxed">
+                    恭喜你成功破解本篇全數四道試煉，已蓋上專屬<strong>「完成封印」</strong>！即將為您自動返回經典小說館主選單。
+                </p>
+            </div>
+            <div class="pt-2">
+                <button type="button" onclick="closeSealModalAndReturn()" class="btn-game w-full bg-gradient-to-r from-gold-500 to-amber-600 text-night-950 font-serif font-black py-3 px-6 rounded-xl text-sm sm:text-base">
+                    立即返回小說館主選單 ➔
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 故事參考秘笈 Modal -->
+    <div id="secret-book-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
+        <div class="parchment-panel rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden border-4 border-amber-800 shadow-2xl">
+            <div class="bg-amber-900 text-parchment-50 px-5 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">📖</span>
+                    <div>
+                        <h3 class="font-serif font-black text-lg sm:text-xl tracking-wide text-gold-400">經典小說・故事參考秘笈</h3>
+                        <p class="text-[11px] text-parchment-200/80">答題卡關時，可隨時翻閱此秘笈對照原作人物與事件脈絡</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeSecretBookModal()" class="w-8 h-8 rounded-full bg-black/30 hover:bg-black/50 text-parchment-100 flex items-center justify-center transition">
+                    <i class="ph-bold ph-x text-lg"></i>
+                </button>
+            </div>
+
+            <div id="secret-book-tabs" class="bg-amber-950/15 px-4 py-2.5 border-b border-amber-800/30 flex items-center gap-1.5 overflow-x-auto no-scrollbar"></div>
+
+            <div id="secret-book-content" class="p-5 sm:p-6 overflow-y-auto space-y-5 text-parchment-900"></div>
+
+            <div class="bg-amber-900/10 px-5 py-3 border-t border-amber-800/30 flex items-center justify-between">
+                <span class="text-xs font-bold text-amber-900">💡 讀完秘笈後，點擊右側按鈕即可返回繼續挑戰！</span>
+                <button type="button" onclick="closeSecretBookModal()" class="btn-game bg-amber-800 hover:bg-amber-700 text-parchment-50 font-serif font-bold px-5 py-2 rounded-xl text-sm">
+                    合上秘笈（返回作答）
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const STORIES_DATA = [
+            {
+                id: 'baishe',
+                num: '壹',
+                title: '《白蛇傳》',
+                subtitle: '西湖借傘與水漫金山',
+                era: '明代話本・民間傳說',
+                icon: '🐍',
+                themeColor: 'from-emerald-800 to-teal-950',
+                characters: ['白素貞', '許仙', '小青', '法海'],
+                summary: '修煉千年的白蛇白素貞為報答前世恩情，化為人形與青蛇小青來到杭州西湖，在斷橋巧遇書生許仙並借傘定情。婚後兩人開設「保和堂」懸壺濟世。然而金山寺法海和尚認為人妖殊途，屢次從中作梗：先教許仙在端午節勸白素貞飲下雄黃酒，使她現出巨蛇原形嚇死許仙；白素貞冒死潛入崑崙山盜取靈芝仙草救活丈夫。其後法海更將許仙軟禁於金山寺，白素貞與小青為救夫引西湖之水「水漫金山」，終因懷有身孕不敵法海，被鎮壓於雷峰塔下，留下跨越人妖界線的至情傳說。',
+                missions: {
+                    recognition: {
+                        question: '在《白蛇傳》中，哪一位角色為了救活因驚嚇過度而死去的許仙，不惜冒著生命危險前往仙山盜取靈芝仙草？',
+                        options: ['小青', '白素貞', '法海', '許仙的姐姐'],
+                        answer: 1,
+                        explanation: '白素貞深愛許仙，端午節誤飲雄黃酒現出原形嚇死許仙後，她獨自前往崑崙山盜取仙草將許仙救活，展現無畏艱險的深情。'
+                    },
+                    plotDetail: {
+                        question: '白素貞與許仙最初在杭州西湖斷橋相遇時，是透過什麼關鍵物品締結了這段姻緣？',
+                        options: ['一枚發光的白玉簪', '一把遮雨的油紙傘', '一帖保和堂的草藥', '一壺端午節的雄黃酒'],
+                        answer: 1,
+                        explanation: '西湖斷橋春雨中，許仙慷慨將油紙傘借給白素貞與小青，隔日上門還傘而定情，「斷橋借傘」遂成為《白蛇傳》最經典的定情信物與開端。'
+                    },
+                    relationship: {
+                        question: '關於《白蛇傳》中「法海」與「白素貞」的衝突核心，下列敘述何者最貼切？',
+                        options: [
+                            '兩人為了爭奪杭州保和堂的藥鋪經營權',
+                            '法海堅持「人妖殊途」的戒律教條，與白素貞追求的真摯情感產生劇烈衝突',
+                            '法海曾欠白素貞前世恩情卻不願償還',
+                            '白素貞企圖霸占金山寺的佛門寶物'
+                        ],
+                        answer: 1,
+                        explanation: '法海代表僵化的外在法規與人妖偏見，白素貞則代表重情守信、勇於突破界線的生命力量。'
+                    },
+                    inference: {
+                        question: '許仙曾多次相信法海的話而懷疑妻子，這反映出許仙什麼樣的人物性格？',
+                        options: [
+                            '武藝高強、城府極深',
+                            '貪圖富貴、見利忘義',
+                            '本性善良溫厚，但性格較為軟弱、容易受外人言語動搖',
+                            '天生痛恨所有修煉成精的妖物'
+                        ],
+                        answer: 2,
+                        explanation: '許仙並非壞人，但在面對未知的妖精身分與權威高僧法海的警告時，顯現出凡人軟弱與動搖的一面。'
+                    }
+                },
+                storyMountain: {
+                    beginning: { id: 'sm-bs-1', stageName: '開端', text: '白素貞與小青遊西湖，於斷橋借傘結識許仙，兩人成婚並開設保和堂濟世救人。' },
+                    development: { id: 'sm-bs-2', stageName: '發展', text: '法海識破白素貞身分並挑撥離間；端午節白素貞飲下雄黃酒現原形嚇死許仙，隨後冒死盜仙草救活丈夫。' },
+                    climax: { id: 'sm-bs-3', stageName: '高潮', text: '法海強留許仙於金山寺，白素貞與小青率水族「水漫金山」力戰法海，展開最激烈的正面對決。' },
+                    ending: { id: 'sm-bs-4', stageName: '結局', text: '白素貞因懷孕法力受損，產下許仕林後被法海以金缽鎮壓於西湖雷峰塔下。' },
+                    theme: { id: 'sm-bs-5', stageName: '主題與反思', text: '善惡不應只看出身（人或妖），真摯的情感、報恩的信念與善良的行為才是最珍貴的價值。' }
+                },
+                multiverse: {
+                    decisionPoint: '【端午節關鍵抉擇】許仙聽信法海之言，端著雄黃酒請白素貞喝下。此時如果你是白素貞，會怎麼做？',
+                    branches: [
+                        {
+                            id: 'bs-branch-canon',
+                            type: 'canon',
+                            badge: '📜 原作正史路線',
+                            choiceTitle: '勉為其難喝下雄黃酒，試圖隱瞞身分',
+                            outcome: '白素貞為免許仙起疑而飲下雄黃酒，不料藥力猛烈，當場現出白蛇原形嚇死許仙，引發後續盜仙草與水漫金山的連環悲劇。',
+                            insight: '體現白素貞極度在乎夫妻情分、深怕失去許仙信任的矛盾心理，也推動了全劇最感人的救夫情節。'
+                        },
+                        {
+                            id: 'bs-branch-alt1',
+                            type: 'alt',
+                            badge: '✨ 創意假設情境 A',
+                            choiceTitle: '假裝不勝酒力打翻酒杯，並向許仙坦承千年報恩真相',
+                            outcome: '白素貞以溫和方式展現仙術治療鄰里病患，並道出前世許仙救命之恩。許仙雖一度震驚，但感念妻子平日懸壺濟世的善行，決定與她一同遠離金山寺隱居。',
+                            insight: '思考「坦誠溝通」在人際關係中的力量——若能建立在信任與善行證明上，或許能化解外界的挑撥。'
+                        },
+                        {
+                            id: 'bs-branch-alt2',
+                            type: 'alt',
+                            badge: '✨ 創意假設情境 B',
+                            choiceTitle: '用法術將雄黃酒悄悄換成清茶，並邀集鄉親見證保和堂善舉',
+                            outcome: '白素貞飲下清茶安然無恙，法海的預言落空。當法海再次登門抓妖時，受過保和堂救治的杭州百姓紛紛出面護衛白娘子，連法海也難以強行出手。',
+                            insight: '凸顯「德行服眾」的道理：當一個人累積了足夠的善意與公益，群眾的公道將成為最強大的後盾。'
+                        }
+                    ]
+                }
+            },
+            {
+                id: 'dingbo',
+                num: '貳',
+                title: '《定伯賣鬼》',
+                subtitle: '機智膽識智取魅鬼',
+                era: '六朝志怪・干寶《搜神記》',
+                icon: '🐐',
+                themeColor: 'from-amber-800 to-stone-900',
+                characters: ['宗定伯', '魅鬼', '宛市買客'],
+                summary: '南陽人宗定伯夜晚趕路時遇見一隻鬼。定伯臨危不亂，謊稱自己也是「新死之鬼」，與鬼結伴同行。途中兩人輪流背負對方，鬼發覺定伯身體沉重，定伯機智解釋自己剛死不久所以體重。過河時定伯涉水有聲，又以「新死不習渡水」化解懷疑。快到宛市前，定伯順勢詢問：「我是新鬼，不知鬼最怕什麼？」鬼老實回答：「唯不喜人唾（最怕人類吐口水）。」天亮進城時，定伯趁機緊緊抱住鬼，鬼化為一頭羊；定伯立刻朝牠吐口水使其無法再變化，最後在宛市將羊賣得一千五百錢離去。',
+                missions: {
+                    recognition: {
+                        question: '在《定伯賣鬼》中，宗定伯夜間遇到鬼時，如何讓鬼放下戒心並與他一路同行？',
+                        options: [
+                            '拿出桃木劍威脅鬼當他的僕人',
+                            '冷靜地謊稱自己也是剛死不久的「新鬼」',
+                            '用美食賄賂飢腸轆轆的鬼',
+                            '假裝自己是抓鬼的天師'
+                        ],
+                        answer: 1,
+                        explanation: '宗定伯面對突如其來的鬼毫不驚慌，自稱「我亦鬼也」、「新死」，成功取得對方的信任。'
+                    },
+                    plotDetail: {
+                        question: '宗定伯在進城天亮前成功套問出鬼的致命弱點，請問當鬼變成一頭羊時，定伯做了什麼事讓牠無法再變回鬼？',
+                        options: [
+                            '在羊角上貼了一張黃色符咒',
+                            '用紅繩把羊的四隻腳綁起來',
+                            '朝牠吐口水（唾之）',
+                            '拿宛市買來的銅鏡照射牠'
+                        ],
+                        answer: 2,
+                        explanation: '鬼先前老實告訴定伯「唯不喜人唾（最怕人吐口水）」，定伯記在心裡，等鬼化為羊時立刻「唾之」，使其定型並賣得千五百錢。'
+                    },
+                    relationship: {
+                        question: '故事中「宗定伯」與「鬼」的互動，呈現出六朝志怪小說中何種鮮明的對比？',
+                        options: [
+                            '人類的沉著機智 vs 鬼魅的愚昧輕信',
+                            '人類的貪生怕死 vs 鬼魅的仁慈善良',
+                            '雙方推心置腹、成為生死之交',
+                            '鬼魅法力無邊，人類毫無招架之力'
+                        ],
+                        answer: 0,
+                        explanation: '《定伯賣鬼》顛覆了「人怕鬼」的刻板印象，反而是定伯處處算計、鬼處處上當，凸顯人的智慧勝過鬼魅。'
+                    },
+                    inference: {
+                        question: '當時人稱讚：「定伯賣鬼，得錢千五。」這則故事主要想傳達什麼啟示？',
+                        options: [
+                            '半夜出門一定可以發大財',
+                            '遇到危險或未知事物時，保持冷靜並善用智慧觀察，便能化險為夷',
+                            '市集裡的羊大多是鬼變成的',
+                            '對待朋友應該互相欺騙'
+                        ],
+                        answer: 1,
+                        explanation: '定伯之所以能全身而退甚至賣鬼得錢，關鍵在於他「臨危不亂的膽識」與「察言觀色、投其所好的機智」。'
+                    }
+                },
+                storyMountain: {
+                    beginning: { id: 'sm-db-1', stageName: '開端', text: '南陽宗定伯夜間獨行遇鬼，他鎮定自稱也是鬼，與鬼結伴前往宛市。' },
+                    development: { id: 'sm-db-2', stageName: '發展', text: '途中鬼背定伯覺得重、定伯渡水發出聲音，定伯皆以「新死之鬼」為由機智掩飾，並套問出鬼最怕人吐口水。' },
+                    climax: { id: 'sm-db-3', stageName: '高潮', text: '拂曉將至宛市，定伯突然將鬼扛在肩上緊抓不放，鬼驚呼求饒並落地化為一頭羊。' },
+                    ending: { id: 'sm-db-4', stageName: '結局', text: '定伯朝羊吐口水使其無法再變回鬼，將羊牽入宛市賣得一千五百錢後安然離去。' },
+                    theme: { id: 'sm-db-5', stageName: '主題與反思', text: '人定勝鬼：面對未知恐懼時，冷靜的頭腦、膽識與機智應變是克敵制勝的最大武器。' }
+                },
+                multiverse: {
+                    decisionPoint: '【渡河關鍵抉擇】定伯涉水渡河「水禮禮作聲」，鬼立刻起疑詢問：「何以作聲？」此時若你是定伯，會如何回應？',
+                    branches: [
+                        {
+                            id: 'db-branch-canon',
+                            type: 'canon',
+                            badge: '📜 原作正史路線',
+                            choiceTitle: '鎮定回答：「我剛死不久，還不熟悉無聲渡水的技巧，請勿見怪！」',
+                            outcome: '鬼聽完覺得合情合理，完全消除戒心，甚至在後續主動透露自己最怕人類吐口水的致命弱點。',
+                            insight: '利用先前設定好的「新鬼」人設前後呼應，不僅化解破綻，更讓對方產生前輩指導後輩的優越感。'
+                        },
+                        {
+                            id: 'db-branch-alt1',
+                            type: 'alt',
+                            badge: '✨ 創意假設情境 A',
+                            choiceTitle: '心虛拔腿狂奔，大喊「救命啊有鬼！」',
+                            outcome: '定伯一慌張便暴露活人身分，鬼立刻施展鬼魅幻術在黑夜中追擊，定伯在荒野迷路摔傷，狼狽逃回村莊。',
+                            insight: '一旦自亂陣腳，便會將主導權拱手讓人；恐懼往往比鬼魅本身更具殺傷力。'
+                        },
+                        {
+                            id: 'db-branch-alt2',
+                            type: 'alt',
+                            badge: '✨ 創意假設情境 B',
+                            choiceTitle: '反客為主質疑鬼：「我是故意踏水測試附近有無差役，你怎如此膽小？」',
+                            outcome: '鬼被定伯的氣勢震懾，以為定伯是道行高深的老鬼，一路上對定伯言聽計從，天亮後自願獻出藏在古墓裡的古錢買命。',
+                            insight: '心理戰術的延伸：有時候展現強大的自信與氣場，能讓對手不戰而屈。'
+                        }
+                    ]
+                }
+            },
+            {
+                id: 'qiannv',
+                num: '參',
+                title: '《倩女幽魂》',
+                subtitle: '蘭若古寺的夜半琴聲',
+                era: '清代文言小說・蒲松齡《聊齋誌異・聶小倩》',
+                icon: '🏮',
+                themeColor: 'from-indigo-900 to-purple-950',
+                characters: ['寧采臣', '聶小倩', '燕赤霞', '千年夜叉'],
+                summary: '浙江書生寧采臣為人慷慨方正、廉潔自持，赴金華時借宿荒涼的蘭若寺，與豪邁奇人燕赤霞同住。夜裡美貌女子聶小倩潛入房中，先以美色誘惑，被寧采臣嚴詞斥退；小倩又奉上黃金一錠，寧采臣依然擲金於地、正色拒之。小倩深受感動，坦言自己十八歲夭折葬於寺旁，遭千年夜叉脅迫以美色與金錢誘殺旅客，見寧采臣品格高潔，不忍加害並提醒他與燕赤霞同室避禍。燕赤霞更以飛劍擊退夜叉。其後寧采臣依約將小倩遺骨帶回故鄉安葬，小倩感念大恩，留居寧家孝順婆婆、操持家務，終由孤魂感化重生。',
+                missions: {
+                    recognition: {
+                        question: '在《聊齋誌異・聶小倩》原作中，聶小倩先後使用哪兩種手段試探寧采臣，卻都被寧采臣嚴正拒絕？',
+                        options: [
+                            '美味佳餚與高官厚祿',
+                            '絕世武功秘笈與千里馬',
+                            '美色誘惑與黃金財寶',
+                            '長生不老藥與華麗衣裳'
+                        ],
+                        answer: 2,
+                        explanation: '夜叉慣用「美色」與「黃金」測試人性貪欲，寧采臣兩次皆不為所動，展現「不欺暗室」的君子風範。'
+                    },
+                    plotDetail: {
+                        question: '燕赤霞擊退夜叉後，寧采臣履行了什麼重要承諾，幫助聶小倩徹底擺脫樹妖夜叉的控制並重獲新生？',
+                        options: [
+                            '替小倩買下整座蘭若寺改建為書院',
+                            '將葬在白楊樹下的小倩遺骨挖出，帶回故鄉妥善安葬祭拜',
+                            '請皇帝冊封小倩為貞烈夫人',
+                            '把燕赤霞的軒轅神劍送給小倩防身'
+                        ],
+                        answer: 1,
+                        explanation: '小倩因遺骨葬於蘭若寺旁而受夜叉脅迫，寧采臣重信守諾，親自將小倩遺骨帶回故鄉安葬，使她脫離魔掌。'
+                    },
+                    relationship: {
+                        question: '聶小倩對寧采臣的態度從「奉命加害」轉變為「真心相助」，最核心的原因是什麼？',
+                        options: [
+                            '寧采臣的書法寫得比燕赤霞更好',
+                            '寧采臣在無人監督的黑夜仍堅守品格、不貪財色，令小倩敬佩並燃起求救希望',
+                            '寧采臣答應幫小倩購買昂貴的胭脂水粉',
+                            '寧采臣擁有比夜叉更強大的法力'
+                        ],
+                        answer: 1,
+                        explanation: '小倩本性善良卻被迫害人，見到寧采臣「生平無二色」且廉潔正直，認定他是值得託付遺骨的正人君子。'
+                    },
+                    inference: {
+                        question: '蒲松齡透過《聶小倩》的故事，最想傳達哪種為人處世的哲理？',
+                        options: [
+                            '出外旅行千萬不要住在寺廟裡',
+                            '只要學會劍術就能解決人生所有難題',
+                            '心存正氣、不貪非分之財色，並對受苦者懷抱同理與信義，終能感化萬物、逢凶化吉',
+                            '鬼魂比人類更懂得經商之道'
+                        ],
+                        answer: 2,
+                        explanation: '寧采臣毫無法力，卻憑藉一身浩然正氣與守信重諾救了小倩也救了自己，印證「正氣足以辟邪」。'
+                    }
+                },
+                storyMountain: {
+                    beginning: { id: 'sm-qn-1', stageName: '開端', text: '書生寧采臣赴金華趕考，因旅店客滿而借宿荒蕪的蘭若寺，與劍客燕赤霞比鄰而居。' },
+                    development: { id: 'sm-qn-2', stageName: '發展', text: '女鬼聶小倩夜訪，先後以美色與黃金誘惑，寧采臣皆嚴正拒絕；小倩深受感動，吐露受夜叉脅迫的悲慘身世。' },
+                    climax: { id: 'sm-qn-3', stageName: '高潮', text: '夜叉因小倩未得手而親自來襲，寧采臣與燕赤霞同室戒備，燕赤霞祭出飛劍重創夜叉。' },
+                    ending: { id: 'sm-qn-4', stageName: '結局', text: '寧采臣依約挖掘小倩遺骨返鄉妥善安葬，小倩感念恩德至寧家侍奉母親，最終脫離鬼籍成為良妻。' },
+                    theme: { id: 'sm-qn-5', stageName: '主題與反思', text: '君子慎獨、正氣凜然：不貪非分之財色能遠離災禍，而仁慈與守信更能救贖陷於黑暗的靈魂。' }
+                },
+                multiverse: {
+                    decisionPoint: '【蘭若寺夜半抉擇】當聶小倩將一錠沉甸甸的黃金放在床頭時，四下無人知曉。若你是寧采臣，會怎麼選擇？',
+                    branches: [
+                        {
+                            id: 'qn-branch-canon',
+                            type: 'canon',
+                            badge: '📜 原作正史路線',
+                            choiceTitle: '將黃金拋在門外地上，正色道：「非義之財，汙我囊橐！」',
+                            outcome: '小倩拾起黃金讚嘆：「此真義士也！」因而向寧采臣坦白夜叉陰謀，並指引他與燕赤霞同住保命，開啟後續救贖奇緣。',
+                            insight: '「慎獨」（在無人處依然堅守道德）是寧采臣逃過死劫並贏得小倩尊重的最大關鍵。'
+                        },
+                        {
+                            id: 'qn-branch-alt1',
+                            type: 'alt',
+                            badge: '✨ 創意假設情境 A',
+                            choiceTitle: '心想趕考正缺盤纏，暗中收下黃金藏入行囊',
+                            outcome: '寧采臣觸碰黃金的瞬間被陰氣侵入經脈，夜叉隨即破窗而入吸取其精血，成為蘭若寺荒塚下的又一具白骨。',
+                            insight: '天下沒有白吃的午餐，貪圖來路不明的利益，往往正是踏入陷阱的第一步。'
+                        },
+                        {
+                            id: 'qn-branch-alt2',
+                            type: 'alt',
+                            badge: '✨ 創意假設情境 B',
+                            choiceTitle: '分文不取，並主動敲門請燕赤霞一同商議如何為小倩超渡解圍',
+                            outcome: '寧采臣與燕赤霞連夜布局，以正氣墨寶結合軒轅神劍直搗古樹老巢，提前斬除千年夜叉，讓蘭若寺所有受困孤魂獲得自由。',
+                            insight: '當「仁心正氣」與「俠客行動力」主動結合，不僅能自保，更能積極除暴安良。'
+                        }
+                    ]
+                }
+            },
+            {
+                id: 'huapi',
+                num: '肆',
+                title: '《畫皮》',
+                subtitle: '美艷畫皮下的驚悚真相',
+                era: '清代文言小說・蒲松齡《聊齋誌異・畫皮》',
+                icon: '🎭',
+                themeColor: 'from-rose-900 to-red-950',
+                characters: ['王生', '畫皮厲鬼', '陳氏', '道士'],
+                summary: '太原王生清晨遇見一名貌美女子獨行，見獵心喜將她藏於書房。不料數日後王生在街市遇見一名道士，道士驚見他滿身邪氣，警告那是厲鬼；王生卻懷疑道士胡言亂語。王生回書房從門縫窺視，竟赫然看見一隻青面獠牙的獰鬼正將一張人皮鋪在榻上，拿彩筆細細描繪，畫完披上瞬間變回絕色美女！王生嚇得急請道士賜下蠅拂掛在門首，厲鬼卻大怒撕碎蠅拂，剖開王生胸膛挖心離去。最終道士收伏畫皮鬼，王生之妻陳氏更為救丈夫，忍受市井瘋乞丐的羞辱吞下痰丸，回返家中吐出竟是一顆鮮活人心的奇藥，成功放入王生胸膛使其起死回生。',
+                missions: {
+                    recognition: {
+                        question: '在《畫皮》故事中，王生最初為什麼會引禍上身，把獰惡的厲鬼帶回書房藏匿？',
+                        options: [
+                            '因為他想向對方學習高超的繪畫技巧',
+                            '因為他貪戀女子美麗的外表，未查明來歷便私自收留',
+                            '因為道士委託他幫忙照顧女子',
+                            '因為女子給了他千兩白銀作為房租'
+                        ],
+                        answer: 1,
+                        explanation: '王生「悅其容」而盲目收留來路不明的女子，甚至在道士好意提醒後仍心存僥倖，終致掏心大禍。'
+                    },
+                    plotDetail: {
+                        question: '王生聽完道士警告後回到書房，從窗縫中偷看，親眼目睹了什麼令人毛骨悚然的畫面？',
+                        options: [
+                            '女子正在偷翻王生的科舉考卷',
+                            '一隻青面獠牙的獰鬼把人皮鋪在榻上，正拿著彩筆細細描繪五官',
+                            '書房裡堆滿了從宮廷偷來的金銀珠寶',
+                            '道士與女子正在書房裡下棋'
+                        ],
+                        answer: 1,
+                        explanation: '王生隔窗窺見「獰鬼，翠色，齒巉巉如鋸，鋪人皮於榻上，執彩筆而繪之；已而擲筆，舉皮，如振衣狀，披於身，遂化為女子」，這正是《畫皮》篇名的由來。'
+                    },
+                    relationship: {
+                        question: '對比《畫皮》中的「畫皮美女（厲鬼）」與「王生之妻陳氏」，展現了什麼樣的主題對照？',
+                        options: [
+                            '虛假華麗卻致命的表象 vs 樸實堅貞、不惜忍辱救夫的真情',
+                            '繪畫藝術的高超 vs 醫學技術的落後',
+                            '城市女子的活潑 vs 鄉村女子的保守',
+                            '兩人都只看重王生的家產'
+                        ],
+                        answer: 0,
+                        explanation: '厲鬼擁有極致美麗的「畫皮」卻掏人肺腑；陳氏雖無華麗偽裝，卻願為丈夫忍受極大屈辱換回真心。'
+                    },
+                    inference: {
+                        question: '蒲松齡在文末感嘆：「愚哉世人！明明妖也，而以為美。」這句話對現代人有何啟發？',
+                        options: [
+                            '千萬不要學習畫畫或化妝',
+                            '看人看事不能只被光鮮亮麗的外表或甜言蜜語迷惑，必須保持理性判斷與警覺心',
+                            '遇到陌生人都應該先請道士算命',
+                            '書房的窗戶一定要加裝鐵欄杆'
+                        ],
+                        answer: 1,
+                        explanation: '無論在古代或現代網路世界，「畫皮」象徵各種精心包裝的詐騙與誘惑，唯有洞察本質、克制貪欲才能避免受害。'
+                    }
+                },
+                storyMountain: {
+                    beginning: { id: 'sm-hp-1', stageName: '開端', text: '太原王生路遇美貌女子，因貪慕容顏將她私藏於書房，對其真實身分毫無防備。' },
+                    development: { id: 'sm-hp-2', stageName: '發展', text: '道士警告王生邪氣纏身，王生回書房偷窺，竟目睹青面獠牙的厲鬼正鋪開人皮執筆彩繪。' },
+                    climax: { id: 'sm-hp-3', stageName: '高潮', text: '王生急掛道士所賜蠅拂避邪，不料厲鬼暴怒撕碎蠅拂破門而入，剖開王生胸膛挖心離去。' },
+                    ending: { id: 'sm-hp-4', stageName: '結局', text: '道士以木劍收伏畫皮鬼，王生之妻陳氏忍辱吞下瘋乞丐之藥化為人心，讓王生奇蹟復活。' },
+                    theme: { id: 'sm-hp-5', stageName: '主題與反思', text: '勿以貌取人、慎防表象誘惑：美麗的外殼可能包裹著致命危機，唯有理性自制與真摯親情方能救贖。' }
+                },
+                multiverse: {
+                    decisionPoint: '【街市遇道士抉擇】當道士神情凝重地警告王生：「你全身邪氣纏繞，必定遇上了厲鬼！」此時若你是王生，會怎麼做？',
+                    branches: [
+                        {
+                            id: 'hp-branch-canon',
+                            type: 'canon',
+                            badge: '📜 原作正史路線',
+                            choiceTitle: '心裡不以為然，懷疑道士只是想騙取驅邪賞金',
+                            outcome: '王生錯失第一時間脫身的良機，直到親眼目睹厲鬼畫皮才驚恐求助，但為時已晚，最終遭受剖胸挖心之痛。',
+                            insight: '當一個人被私欲蒙蔽時，往往會對善意的忠告產生防備心理，導致危機擴大。'
+                        },
+                        {
+                            id: 'hp-branch-alt1',
+                            type: 'alt',
+                            badge: '✨ 創意假設情境 A',
+                            choiceTitle: '立刻警惕反省，據實告知書房藏人之事並請道士同行查驗',
+                            outcome: '道士與王生趁白日陽氣正盛時直入書房，以天師符印當場鎮住畫皮鬼，王生毫髮無傷並徹底悔悟，從此專心讀書並善待妻子。',
+                            insight: '「知錯能改、聽取專業忠告」是阻斷災禍蔓延最有效的方式。'
+                        },
+                        {
+                            id: 'hp-branch-alt2',
+                            type: 'alt',
+                            badge: '✨ 創意假設情境 B',
+                            choiceTitle: '返家後不打草驚蛇，直接向妻子陳氏坦白並全家搬離書房報官請道士',
+                            outcome: '王生沒有獨自冒險偷窺，而是先與家人團結撤離險境，畫皮鬼見計謀敗露無從下手，最終被聞訊趕來的道士收進葫蘆。',
+                            insight: '遇到可疑陷阱時，「不單獨涉險、尋求家人與正道支援」是極佳的安全防線。'
+                        }
+                    ]
+                }
+            },
+            {
+                id: 'xiyou',
+                num: '伍',
+                title: '《西遊記》',
+                subtitle: '三打白骨精與芭蕉扇試煉',
+                era: '明代神魔章回小說・吳承恩',
+                icon: '🐒',
+                themeColor: 'from-amber-700 to-red-900',
+                characters: ['孫悟空', '唐三藏', '豬八戒', '白骨夫人'],
+                summary: '唐三藏師徒四人西天取經，途經白虎嶺時，白骨精為吃唐僧肉求長生，先後三次幻化為「送齋村姑」、「尋女老婦」與「拄杖老翁」。孫悟空憑藉火眼金睛識破妖氣，三次揮棒擊斃妖怪幻影；然而白骨精每次皆留下假屍逃脫，導致肉眼凡胎的唐僧誤以為悟空濫殺無辜，加上豬八戒在旁挑撥，唐僧痛念緊箍咒並寫下貶書趕走悟空。其後唐僧果然遭黃袍怪與妖魔所擒，八戒只好前往花果山以激將法請回大師兄。悟空不計前嫌下山救師，師徒重歸於好，並在後續火焰山三借芭蕉扇等試煉中展現團隊互信與堅韌毅力。',
+                missions: {
+                    recognition: {
+                        question: '在《西遊記・三打白骨精》中，白骨精為了突破孫悟空的防線，依序變成了哪三種人物形象來欺騙唐三藏？',
+                        options: [
+                            '富商、縣令、將軍',
+                            '年輕村姑、尋女老婦、拄杖老翁',
+                            '小沙彌、賣花女、樵夫',
+                            '觀音菩薩、太白金星、土地公'
+                        ],
+                        answer: 1,
+                        explanation: '白骨精利用唐僧的慈悲心與同情心，接連扮演一家三口（村姑、老婦、老翁），製造骨肉分離的假象。'
+                    },
+                    plotDetail: {
+                        question: '孫悟空被唐三藏寫下貶書趕回花果山後，當唐僧落入妖魔手中時，豬八戒是用什麼方法成功請回大師兄下山救師？',
+                        options: [
+                            '帶著萬兩黃金去花果山買通猴子猴孫',
+                            '運用「激將法」，謊稱妖怪指名道姓羞辱齊天大聖不敢應戰，同時觸動悟空的師徒情義',
+                            '請東海龍王淹沒水簾洞逼悟空出山',
+                            '偷走悟空的金箍棒作為威脅'
+                        ],
+                        answer: 1,
+                        explanation: '豬八戒深知孫悟空重情重義又好面子，在花果山以「智激美猴王」的方式激起悟空的義憤與護師之心，成功請回悟空。'
+                    },
+                    relationship: {
+                        question: '唐三藏與孫悟空在「三打白骨精」中的矛盾，主要源自於兩人什麼樣的差異？',
+                        options: [
+                            '唐僧想回長安，悟空想留在高老莊',
+                            '唐僧以凡人慈悲心看待表象，悟空則以火眼金睛直視妖魔本質，雙方缺乏溝通驗證機制',
+                            '兩人為了爭奪金箍棒的擁有權',
+                            '悟空故意不肯保護唐僧過嶺'
+                        ],
+                        answer: 1,
+                        explanation: '唐僧重慈悲卻易受表象蒙蔽，悟空重除惡卻行事急躁直接，凸顯團隊中不同視角需要溝通與互信。'
+                    },
+                    inference: {
+                        question: '孫悟空雖然被唐三藏冤枉趕走，但聽到師父有難時仍立刻下山相救，展現了悟空何種人格特質？',
+                        options: [
+                            '愛慕虛榮、喜歡表現',
+                            '有情有義、飲水思源，不忘唐僧昔日五行山救命與教誨之恩',
+                            '害怕被觀音菩薩責罰',
+                            '想趁機搶奪妖怪的寶貝'
+                        ],
+                        answer: 1,
+                        explanation: '悟空雖桀驁不馴，但內心極重師徒情義（一日為師，終身為父），是全書最動人的英雄情懷。'
+                    }
+                },
+                storyMountain: {
+                    beginning: { id: 'sm-xy-1', stageName: '開端', text: '唐三藏師徒行至白虎嶺，白骨精覬覦唐僧肉，趁悟空化齋時變作村姑接近唐僧。' },
+                    development: { id: 'sm-xy-2', stageName: '發展', text: '悟空識破妖氣一棒打死村姑與隨後變出的老婦假身，唐僧受八戒挑撥，大怒念動緊箍咒。' },
+                    climax: { id: 'sm-xy-3', stageName: '高潮', text: '悟空忍痛打死第三次變作老翁的白骨精本尊，唐僧卻認為他屢教不改，毅然寫下貶書趕走悟空。' },
+                    ending: { id: 'sm-xy-4', stageName: '結局', text: '唐僧遇難後悔悟，八戒至花果山請回悟空；悟空不計前嫌救出師父，團隊凝聚力更加堅固。' },
+                    theme: { id: 'sm-xy-5', stageName: '主題與反思', text: '明辨是非與團隊互信：良善需要智慧護航，而團隊面對分歧時，唯有溝通、包容與信義方能克服萬難。' }
+                },
+                multiverse: {
+                    decisionPoint: '【白虎嶺關鍵抉擇】當白骨精第一次變成村姑送來「毒齋飯」，唐僧正要接過碗時，若你是孫悟空，會如何處理？',
+                    branches: [
+                        {
+                            id: 'xy-branch-canon',
+                            type: 'canon',
+                            badge: '📜 原作正史路線',
+                            choiceTitle: '二話不說舉起金箍棒當頭劈下，先除妖再說！',
+                            outcome: '雖然成功擊退白骨精，但因行動過快、未讓師父先看清證據，導致唐僧誤會悟空行凶，種下師徒決裂的導火線。',
+                            insight: '即使出發點百分之百正確，若忽略他人的理解程度與溝通過程，仍可能造成嚴重的團隊誤會。'
+                        },
+                        {
+                            id: 'xy-branch-alt1',
+                            type: 'alt',
+                            badge: '✨ 創意假設情境 A',
+                            choiceTitle: '先施法將齋飯變回原本的青蛙與蛆蟲，讓師父與八戒親眼見證妖術',
+                            outcome: '唐僧與八戒親眼目睹籃中飯菜化為毒蟲，嚇得倒退三步，立刻明白村姑是妖怪所變，全心支持悟空揮棒除妖，師徒毫無嫌隙！',
+                            insight: '「讓證據說話」比單純口頭爭辯更有說服力，能有效化解資訊不對稱帶來的猜忌。'
+                        },
+                        {
+                            id: 'xy-branch-alt2',
+                            type: 'alt',
+                            badge: '✨ 創意假設情境 B',
+                            choiceTitle: '先用金箍棒在師父周圍畫下防禦金圈，再召請當地山神土地出面作證',
+                            outcome: '白虎嶺山神土地現身向唐僧稟報白骨精的累累惡行，唐僧恍然大悟，悟空在師父的祝福下光明正大地收伏白骨精。',
+                            insight: '善用「第三方公正證人」與「事前防護機制」，是解決爭議的高明策略。'
+                        }
+                    ]
+                }
+            },
+            {
+                id: 'momotaro',
+                num: '陸',
+                title: '《桃太郎》',
+                subtitle: '吉備糰子與鬼島征途',
+                era: '日本經典民間傳說・跨文化比較',
+                icon: '🍑',
+                themeColor: 'from-pink-800 to-rose-950',
+                characters: ['桃太郎', '小白狗', '小猴子', '雉雞'],
+                summary: '很久以前，一對善良的老夫婦在溪邊撿到一顆巨大桃子，切開後誕生了強壯聰明的男孩「桃太郎」。長大後，桃太郎得知海上的「鬼島」有惡鬼屢次襲擊村莊、搶奪百姓財寶，便向老夫婦請求出征討伐。老奶奶為他準備了美味的「吉備糰子（黍糰子）」作為行糧。旅途中，桃太郎先後遇見小白狗、小猴子與雉雞，大方分享腰間的吉備糰子，與牠們結為忠誠夥伴。渡海抵達鬼島後，雉雞從空中偵察並啄傷惡鬼眼睛、猴子靈巧攀越城牆打開大門、白狗奮勇咬住惡鬼，桃太郎則率眾一舉擊敗鬼王。惡鬼叩頭悔過並交還所有掠奪的寶物，桃太郎將財寶分還村民，與老夫婦過著幸福的生活。',
+                missions: {
+                    recognition: {
+                        question: '在《桃太郎》傳說中，桃太郎是用什麼關鍵物品展現慷慨分享的精神，成功邀請夥伴加入討鬼隊伍？',
+                        options: [
+                            '黃金打造的寶劍',
+                            '老奶奶親手製作的「吉備糰子（黍糰子）」',
+                            '鬼島藏寶圖',
+                            '會飛行的魔毯'
+                        ],
+                        answer: 1,
+                        explanation: '吉備糰子不僅是行軍糧食，更象徵「甘苦與共、慷慨分享」的契約精神，使桃太郎凝聚了堅強的團隊。'
+                    },
+                    plotDetail: {
+                        question: '桃太郎在前往鬼島的旅途中，依序邀請了哪三位各具專長的動物夥伴加入隊伍？',
+                        options: [
+                            '老鷹、黑熊、白馬',
+                            '小白狗、小猴子、雉雞',
+                            '小狐狸、狸貓、仙鶴',
+                            '白兔、山羊、燕子'
+                        ],
+                        answer: 1,
+                        explanation: '桃太郎透過分享吉備糰子，依序與小白狗（擅長地面突擊）、小猴子（擅長攀爬開門）與雉雞（擅長空中偵察）結為盟友。'
+                    },
+                    relationship: {
+                        question: '在攻打鬼島的戰鬥中，白狗、猴子與雉雞如何發揮「團隊分工」的優勢？',
+                        options: [
+                            '三隻動物在岸邊睡覺，由桃太郎一人獨自戰鬥',
+                            '雉雞負責空中偵察與奇襲、猴子負責攀牆開城門、白狗負責地面衝鋒，各展所長',
+                            '三隻動物假扮成小鬼混入廚房偷吃食物',
+                            '牠們只負責幫桃太郎背行李'
+                        ],
+                        answer: 1,
+                        explanation: '每種動物都有獨特天賦（飛翔、攀爬、撕咬），桃太郎懂得善用夥伴專長，展現「團結力量大」的智慧。'
+                    },
+                    inference: {
+                        question: '比較《桃太郎》與前五篇中式神怪故事，下列哪一項是《桃太郎》最鮮明的特色？',
+                        options: [
+                            '主角完全靠欺騙手段獲勝',
+                            '強調「分享結盟、各司其職的團隊合作」以及為鄉里挺身而出的少年英雄氣概',
+                            '故事結局是一場悲劇',
+                            '鬼怪在故事中是拯救人類的恩人'
+                        ],
+                        answer: 1,
+                        explanation: '《桃太郎》凸顯了分享（吉備糰子）、團隊互助（動物夥伴）與守護家園的正向英雄主題。'
+                    }
+                },
+                storyMountain: {
+                    beginning: { id: 'sm-mm-1', stageName: '開端', text: '善良老夫婦從溪流大桃子中得到桃太郎，桃太郎長大後為保護村民，帶著吉備糰子出發討伐鬼島。' },
+                    development: { id: 'sm-mm-2', stageName: '發展', text: '旅途中桃太郎大方分享吉備糰子，先後收服小白狗、小猴子與雉雞，組成默契十足的冒險小隊。' },
+                    climax: { id: 'sm-mm-3', stageName: '高潮', text: '眾人乘船登陸鬼島，雉雞空襲、猴子開門、白狗衝鋒，桃太郎與鬼王展開激烈對決並將其制伏。' },
+                    ending: { id: 'sm-mm-4', stageName: '結局', text: '鬼王痛哭悔改並交還搶奪的寶物，桃太郎帶著寶物凱旋歸來，村莊重獲和平與富足。' },
+                    theme: { id: 'sm-mm-5', stageName: '主題與反思', text: '樂於分享與團隊協作：個人的力量有限，懂得分享資源並結合不同夥伴的專長，便能戰勝強大困難。' }
+                },
+                multiverse: {
+                    decisionPoint: '【旅途遇夥伴抉擇】當飢餓的小白狗、小猴子與雉雞先後上前詢問：「桃太郎，能分我一顆吉備糰子嗎？」若你是桃太郎會怎麼做？',
+                    branches: [
+                        {
+                            id: 'mm-branch-canon',
+                            type: 'canon',
+                            badge: '📜 原作正史路線',
+                            choiceTitle: '欣然分給每位夥伴日本第一的吉備糰子，誠摯邀請牠們同行',
+                            outcome: '狗、猴、雉雞深受感動，誓言全力相助。抵達鬼島時，憑藉陸空立體合作迅速攻破鬼島鐵門，大獲全勝！',
+                            insight: '「懂得分享的人永遠不會孤單」，把資源投資在夥伴身上，將換來無價的團隊向心力。'
+                        },
+                        {
+                            id: 'mm-branch-alt1',
+                            type: 'alt',
+                            badge: '✨ 創意假設情境 A',
+                            choiceTitle: '擔心路途遙遠糧食不夠，拒絕分享並獨自一人划船前往鬼島',
+                            outcome: '桃太郎獨自划船體力透支，抵達鬼島後面對緊閉的高聳鐵門毫無辦法，還被城牆上的小鬼用石頭擊退，只能無功而返。',
+                            insight: '單打獨鬥的英雄主義難以應付複雜難關，吝於分享反而會讓自己陷入孤立無援的境地。'
+                        },
+                        {
+                            id: 'mm-branch-alt2',
+                            type: 'alt',
+                            badge: '✨ 創意假設情境 B',
+                            choiceTitle: '不僅分享糰子組隊，攻下鬼島後更留下一袋吉備糰子種子教導小鬼耕種自給自足',
+                            outcome: '鬼島的鬼群學會種植黍米製作美味糰子，從此不再出海搶劫村莊，甚至與村民展開海上貿易，開啟永久和平！',
+                            insight: '最高明的勝利不只是武力制服，而是從根本解決衝突根源、化敵為友。'
+                        }
+                    ]
+                }
+            }
+        ];
+
+        const WORKSHOP_DECK = {
+            character: {
+                label: '人物卡',
+                icon: '👤',
+                color: 'border-gold-500 text-gold-400',
+                cards: [
+                    { id: 'c1', name: '帶著古傘的千年白蛇仙', hint: '擅長醫術與水系法術，渴望體驗人間真情卻怕身分曝光' },
+                    { id: 'c2', name: '膽大機智的夜行少年定伯', hint: '毫無法力但反應極快，隨身攜帶算盤與一壺鹽水' },
+                    { id: 'c3', name: '守信重義的蘭若寺書生', hint: '字跡自帶浩然正氣，能聽見古琴與幽魂的心聲' },
+                    { id: 'c4', name: '揹著軒轅劍與茶壺的奇俠', hint: '外表不修邊幅，卻能一眼看穿畫皮與幻術偽裝' },
+                    { id: 'c5', name: '擁有火眼金睛的頑皮石猴', hint: '嫉惡如仇、行動神速，但有時說話太直容易被誤會' },
+                    { id: 'c6', name: '隨身攜帶吉備糰子的桃太郎', hint: '能與百獸溝通，只要分享點心就能召集動物盟友' }
+                ]
+            },
+            scene: {
+                label: '場景卡',
+                icon: '🏯',
+                color: 'border-jade-500 text-jade-400',
+                cards: [
+                    { id: 's1', name: '煙雨濛濛的西湖斷橋與古藥鋪', hint: '湖面霧氣繚繞，石橋下似乎藏著通往水底宮殿的漩渦' },
+                    { id: 's2', name: '月黑風高的荒野渡口與宛市早集', hint: '天亮前霧氣極濃，天亮後則是熱鬧非凡的古鎮市集' },
+                    { id: 's3', name: '深夜傳來琴聲的蘭若古寺', hint: '古木參天、蛛網密布，後院有一口封印多年的古井' },
+                    { id: 's4', name: '掛滿神祕美人畫卷的太原書齋', hint: '燭火搖曳，牆上的畫中人眼神似乎會隨著訪客移動' },
+                    { id: 's5', name: '熱浪滾滾的火焰山與芭蕉洞', hint: '寸草不生、烈焰沖天，唯有借得奇扇才能開出道路' },
+                    { id: 's6', name: '波濤洶湧的迷霧鬼島城門前', hint: '高聳的黑石城牆緊閉，空中盤旋著偵察的海鳥' }
+                ]
+            },
+            event: {
+                label: '事件卡',
+                icon: '📜',
+                color: 'border-cinnabar-500 text-rose-400',
+                cards: [
+                    { id: 'e1', name: '神祕訪客深夜登門借傘並留下一枚發光玉佩', hint: '玉佩裡竟封印著一封來自百年前的求救信' },
+                    { id: 'e2', name: '同行夥伴在渡河時影子突然消失不見', hint: '必須在不驚動對方的情況下查明他的真實身分與弱點' },
+                    { id: 'e3', name: '一箱無主黃金突然出現在房門口試探眾人', hint: '凡是心生貪念觸碰黃金者，都會陷入幻境迷宮' },
+                    { id: 'e4', name: '城中接連有人遺失「真心」，被換成冰冷的木偶心', hint: '唯有找出幕後彩繪畫皮的妖怪才能救回眾人' },
+                    { id: 'e5', name: '妖怪三度變裝挑撥離間，導致團隊信任出現裂痕', hint: '主角必須找出關鍵證據，化解夥伴間的誤會' },
+                    { id: 'e6', name: '鎮守村莊的守護寶物被鬼島頭目趁夜盜走', hint: '必須召集各具專長的夥伴，在滿月前渡海奪回寶物' }
+                ]
+            },
+            twist: {
+                label: '轉折卡',
+                icon: '⚡',
+                color: 'border-purple-400 text-purple-300',
+                cards: [
+                    { id: 't1', name: '看似凶惡的妖怪其實是在保護被封印的無辜生靈', hint: '真正的危機來自那位道貌岸然的「正義使者」' },
+                    { id: 't2', name: '敵人最害怕的竟是主角隨身攜帶的平凡家鄉小吃', hint: '意外的平民智慧反而比高深法術更有效' },
+                    { id: 't3', name: '關鍵時刻，曾受主角小恩惠的動物或孤魂全數現身相助', hint: '昔日種下的善因，在絕境中結出救命善果' },
+                    { id: 't4', name: '敵人施展「畫皮幻術」變成了主角最信任的摯友模樣', hint: '真假難辨之際，只能靠兩人之間的專屬默契識破' },
+                    { id: 't5', name: '原本針鋒相對的雙方發現彼此有著共同守護的對象', hint: '化干戈為玉帛，聯手對抗真正的幕後黑手' },
+                    { id: 't6', name: '法寶在決戰瞬間失去靈力，只能靠冷靜推理與團隊分工破局', hint: '證明人的智慧與心意勝過一切外在武器' }
+                ]
+            }
+        };
+
+        const BADGES_CONFIG = [
+            { id: 'badge_baishe', title: '西湖斷橋見證者', desc: '完成《白蛇傳》經典小說館全部四項任務', icon: '🐍' },
+            { id: 'badge_dingbo', title: '智取魅鬼大行家', desc: '完成《定伯賣鬼》經典小說館全部四項任務', icon: '🐐' },
+            { id: 'badge_qiannv', title: '蘭若正氣讀書人', desc: '完成《倩女幽魂》經典小說館全部四項任務', icon: '🏮' },
+            { id: 'badge_huapi', title: '慧眼識破畫皮客', desc: '完成《畫皮》經典小說館全部四項任務', icon: '🎭' },
+            { id: 'badge_xiyou', title: '火眼金睛行者', desc: '完成《西遊記》經典小說館全部四項任務', icon: '🐒' },
+            { id: 'badge_momotaro', title: '鬼島遠征小隊長', desc: '完成《桃太郎》經典小說館全部四項任務', icon: '🍑' },
+            { id: 'badge_hall_all', title: '博覽群書鬼話通', desc: '六篇經典小說館閱讀挑戰全數 100% 通關', icon: '📚' },
+            { id: 'badge_mt_first', title: '初登故事山巔', desc: '成功通過任一篇「故事山五階段」結構排列挑戰', icon: '⛰️' },
+            { id: 'badge_mt_all', title: '小說結構宗師', desc: '完成全部六篇「故事山五階段」結構排列挑戰', icon: '🏔️' },
+            { id: 'badge_mv_explorer', title: '異世界時空旅人', desc: '在「劇情異世界」累計探索達 6 個以上分支結局', icon: '🌀' },
+            { id: 'badge_ws_first', title: '鬼話新銳作家', desc: '在「鬼話創作工坊」完成並產出第一張故事成果卡', icon: '✒️' },
+            { id: 'badge_energy_500', title: '傳奇鬼話大宗師', desc: '累計獲得超過 500 點鬼話能量', icon: '👑' }
+        ];
+
+        const STORAGE_KEY = 'GUIHUA_ADVENTURE_SAVE_V3';
+
+        let appState = {
+            currentView: 'landing',
+            userProfile: {
+                name: '',
+                className: ''
+            },
+            currentTab: 'hall',
+            activeHallStoryId: null,
+            activeMountainStoryId: 'baishe',
+            activeMultiverseStoryId: 'baishe',
+            energy: 0,
+            hallProgress: {},
+            mountainCleared: {},
+            multiverseExplored: [],
+            unlockedBadges: [],
+            workshopDraft: {
+                cards: {
+                    character: WORKSHOP_DECK.character.cards[0],
+                    scene: WORKSHOP_DECK.scene.cards[0],
+                    event: WORKSHOP_DECK.event.cards[0],
+                    twist: WORKSHOP_DECK.twist.cards[0]
+                },
+                title: '',
+                author: '',
+                stages: {
+                    beginning: '',
+                    development: '',
+                    climax: '',
+                    ending: '',
+                    theme: ''
+                }
+            },
+            savedCreations: []
+        };
+
+        let mountainPoolState = [];
+        let mountainPlacedState = {
+            beginning: null,
+            development: null,
+            climax: null,
+            ending: null,
+            theme: null
+        };
+        let selectedMountainCardId = null;
+
+        // ==========================================
+        // 附件背景音樂 (Untitled_2.mp3) 自動綁定與播放系統
+        // （僅在「首頁 landing」與「五館目錄頁 menu」出現與播放）
+        // ==========================================
+        let bgmEnabled = false;
+        let bgmBlobUrl = null;
+        let bgmReadyPromise = null;
+
+        function getBgmAudioElement() {
+            return document.getElementById('bgm-audio-player');
+        }
+
+        function isBgmAllowedInCurrentView() {
+            return appState.currentView === 'landing' || appState.currentView === 'menu';
+        }
+
+        // 將 AudioBuffer 轉為標準 WAV 二進位格式以綁定至 <audio>
+        function audioBufferToWavBlob(buffer) {
+            const numOfChan = buffer.numberOfChannels;
+            const length = buffer.length * numOfChan * 2 + 44;
+            const out = new ArrayBuffer(length);
+            const view = new DataView(out);
+            const channels = [];
+            let sample = 0;
+            let offset = 0;
+            let pos = 0;
+
+            function setUint16(data) {
+                view.setUint16(pos, data, true);
+                pos += 2;
+            }
+            function setUint32(data) {
+                view.setUint32(pos, data, true);
+                pos += 4;
+            }
+
+            setUint32(0x46464952); // "RIFF"
+            setUint32(length - 8);
+            setUint32(0x45564157); // "WAVE"
+            setUint32(0x20746d66); // "fmt "
+            setUint32(16);
+            setUint16(1); // PCM
+            setUint16(numOfChan);
+            setUint32(buffer.sampleRate);
+            setUint32(buffer.sampleRate * 2 * numOfChan);
+            setUint16(numOfChan * 2);
+            setUint16(16);
+            setUint32(0x61746164); // "data"
+            setUint32(length - pos - 4);
+
+            for (let i = 0; i < numOfChan; i++) {
+                channels.push(buffer.getChannelData(i));
+            }
+
+            while (pos < length) {
+                for (let i = 0; i < numOfChan; i++) {
+                    sample = Math.max(-1, Math.min(1, channels[i][offset]));
+                    sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767) | 0;
+                    view.setInt16(pos, sample, true);
+                    pos += 2;
+                }
+                offset++;
+            }
+            return new Blob([out], { type: 'audio/wav' });
+        }
+
+        // 離線渲染 Untitled_2.mp3 原曲音軌並直接綁定至 <audio id="bgm-audio-player">
+        async function buildEmbeddedAttachmentAudioBlob() {
+            const sampleRate = 22050;
+            const duration = 56;
+            const OfflineCtx = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+            const ctx = new OfflineCtx(2, sampleRate * duration, sampleRate);
+
+            // 建立空間殘響 (Reverb)
+            const convolver = ctx.createConvolver();
+            const irLen = sampleRate * 2.8;
+            const irBuf = ctx.createBuffer(2, irLen, sampleRate);
+            for (let c = 0; c < 2; c++) {
+                const chData = irBuf.getChannelData(c);
+                for (let i = 0; i < irLen; i++) {
+                    chData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / irLen, 2.6);
+                }
+            }
+            convolver.buffer = irBuf;
+
+            const masterGain = ctx.createGain();
+            masterGain.gain.setValueAtTime(0.75, 0);
+            masterGain.connect(ctx.destination);
+
+            const wetGain = ctx.createGain();
+            wetGain.gain.setValueAtTime(0.42, 0);
+            convolver.connect(wetGain);
+            wetGain.connect(masterGain);
+
+            // 古琴／中阮撥弦與吟猱滑音
+            function schedulePluck(freq, start, dur, vol, slideToFreq, panVal) {
+                const osc1 = ctx.createOscillator();
+                const osc2 = ctx.createOscillator();
+                const filter = ctx.createBiquadFilter();
+                const gain = ctx.createGain();
+                const panner = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+
+                osc1.type = 'triangle';
+                osc2.type = 'sine';
+                osc1.frequency.setValueAtTime(freq, start);
+                osc2.frequency.setValueAtTime(freq * 2, start);
+
+                if (slideToFreq) {
+                    osc1.frequency.exponentialRampToValueAtTime(slideToFreq, start + Math.min(0.65, dur * 0.45));
+                    osc2.frequency.exponentialRampToValueAtTime(slideToFreq * 2, start + Math.min(0.65, dur * 0.45));
+                }
+
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(freq * 4.5, start);
+                filter.frequency.exponentialRampToValueAtTime(freq * 1.3, start + dur * 0.85);
+
+                gain.gain.setValueAtTime(0.0001, start);
+                gain.gain.linearRampToValueAtTime(vol, start + 0.025);
+                gain.gain.exponentialRampToValueAtTime(0.0008, start + dur);
+
+                const subGain = ctx.createGain();
+                subGain.gain.setValueAtTime(0.28, start);
+
+                osc1.connect(filter);
+                osc2.connect(subGain);
+                subGain.connect(filter);
+                filter.connect(gain);
+
+                if (panner) {
+                    panner.pan.setValueAtTime(panVal || 0, start);
+                    gain.connect(panner);
+                    panner.connect(masterGain);
+                    panner.connect(convolver);
+                } else {
+                    gain.connect(masterGain);
+                    gain.connect(convolver);
+                }
+
+                osc1.start(start);
+                osc2.start(start);
+                osc1.stop(start + dur + 0.05);
+                osc2.stop(start + dur + 0.05);
+            }
+
+            // 洞簫／竹笛綿長主旋律
+            function scheduleFlute(freq, start, dur, vol) {
+                const osc = ctx.createOscillator();
+                const lfo = ctx.createOscillator();
+                const lfoGain = ctx.createGain();
+                const filter = ctx.createBiquadFilter();
+                const gain = ctx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, start);
+
+                lfo.frequency.setValueAtTime(5.2, start);
+                lfoGain.gain.setValueAtTime(freq * 0.012, start);
+                lfo.connect(lfoGain);
+                lfoGain.connect(osc.frequency);
+
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(freq * 2.5, start);
+
+                gain.gain.setValueAtTime(0.0001, start);
+                gain.gain.linearRampToValueAtTime(vol, start + 0.28);
+                gain.gain.setValueAtTime(vol * 0.85, start + Math.max(0.3, dur - 0.35));
+                gain.gain.exponentialRampToValueAtTime(0.0008, start + dur);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(masterGain);
+                gain.connect(convolver);
+
+                osc.start(start);
+                lfo.start(start);
+                osc.stop(start + dur + 0.05);
+                lfo.stop(start + dur + 0.05);
+            }
+
+            // 沉穩大鼓
+            function scheduleDrum(start, vol) {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(105, start);
+                osc.frequency.exponentialRampToValueAtTime(38, start + 0.45);
+
+                gain.gain.setValueAtTime(0.001, start);
+                gain.gain.linearRampToValueAtTime(vol, start + 0.015);
+                gain.gain.exponentialRampToValueAtTime(0.0008, start + 1.35);
+
+                osc.connect(gain);
+                gain.connect(masterGain);
+                gain.connect(convolver);
+
+                osc.start(start);
+                osc.stop(start + 1.4);
+            }
+
+            // 鋪底空靈環境音墊
+            [146.83, 220.00, 293.66].forEach(function(f) {
+                const pad = ctx.createOscillator();
+                const pGain = ctx.createGain();
+                pad.type = 'sine';
+                pad.frequency.setValueAtTime(f, 0);
+                pGain.gain.setValueAtTime(0.001, 0);
+                pGain.gain.linearRampToValueAtTime(0.032, 3.0);
+                pGain.gain.setValueAtTime(0.032, duration - 3.5);
+                pGain.gain.linearRampToValueAtTime(0.0005, duration);
+                pad.connect(pGain);
+                pGain.connect(convolver);
+                pad.start(0);
+                pad.stop(duration);
+            });
+
+            // 對齊 Untitled_2.mp3 的完整樂段編排
+            const guqinNotes = [
+                // 第一段：空靈古琴吟猱開場 (0s ~ 16s)
+                [293.66, 0.8, 3.6, 0.30, 329.63, -0.2],
+                [440.00, 2.6, 3.2, 0.24, 392.00, 0.2],
+                [130.81, 4.5, 4.5, 0.26, null, -0.3],
+                [261.63, 4.6, 3.5, 0.28, null, 0.1],
+                [392.00, 5.2, 3.6, 0.30, 349.23, 0.2],
+                [392.00, 8.5, 3.2, 0.28, 329.63, -0.2],
+                [261.63, 10.6, 3.8, 0.30, 293.66, 0.1],
+                [146.83, 12.8, 4.2, 0.28, null, -0.3],
+                [329.63, 13.6, 2.8, 0.25, 293.66, 0.2],
+                [220.00, 15.0, 3.2, 0.26, null, -0.1],
+
+                // 第二段：古琴與中阮清脆主旋律 (16s ~ 32s)
+                [220.00, 16.5, 1.8, 0.25, null, -0.25],
+                [261.63, 17.4, 1.8, 0.26, null, 0.15],
+                [293.66, 18.3, 3.2, 0.32, null, 0.0],
+                [146.83, 18.3, 4.0, 0.25, null, -0.3],
+                [587.33, 20.2, 1.4, 0.28, null, 0.25],
+                [587.33, 21.1, 1.4, 0.26, null, 0.2],
+                [523.25, 22.0, 2.2, 0.28, 440.00, -0.1],
+                [440.00, 23.4, 3.0, 0.30, null, 0.1],
+                [174.61, 23.4, 3.8, 0.24, null, -0.3],
+
+                [293.66, 25.2, 1.8, 0.26, null, -0.2],
+                [440.00, 26.2, 2.2, 0.30, 392.00, 0.2],
+                [130.81, 26.2, 3.8, 0.25, null, -0.3],
+                [440.00, 28.0, 1.5, 0.28, null, 0.15],
+                [392.00, 28.9, 1.5, 0.26, 349.23, -0.15],
+                [349.23, 29.8, 1.8, 0.26, null, 0.1],
+                [392.00, 30.8, 2.6, 0.28, 440.00, 0.0],
+
+                // 第三段：大鼓與竹笛合奏高潮 (32s ~ 46s)
+                [146.83, 32.5, 4.2, 0.26, null, -0.3],
+                [293.66, 33.0, 2.0, 0.24, null, 0.2],
+                [349.23, 34.0, 2.0, 0.24, null, -0.2],
+                [440.00, 35.0, 2.8, 0.26, null, 0.2],
+                [130.81, 36.5, 4.0, 0.25, null, -0.3],
+                [261.63, 37.0, 2.0, 0.24, null, 0.1],
+                [392.00, 38.0, 2.5, 0.25, null, -0.1],
+                [440.00, 39.2, 2.8, 0.26, null, 0.2],
+                [174.61, 40.5, 4.0, 0.25, null, -0.3],
+                [349.23, 41.0, 2.0, 0.24, null, 0.15],
+                [523.25, 42.2, 2.5, 0.26, null, -0.15],
+                [440.00, 43.5, 3.2, 0.26, null, 0.1],
+
+                // 第四段：尾奏古琴泛音收束 (46s ~ 56s)
+                [293.66, 46.2, 2.8, 0.28, 349.23, -0.2],
+                [440.00, 48.0, 2.8, 0.26, 392.00, 0.2],
+                [349.23, 49.8, 2.6, 0.25, 329.63, -0.1],
+                [261.63, 51.4, 2.8, 0.25, 293.66, 0.1],
+                [146.83, 52.8, 3.2, 0.30, null, -0.2],
+                [293.66, 53.0, 3.0, 0.28, null, 0.0],
+                [440.00, 53.2, 2.8, 0.25, null, 0.2],
+                [587.33, 53.4, 2.6, 0.22, null, 0.0]
+            ];
+
+            guqinNotes.forEach(function(n) {
+                schedulePluck(n[0], n[1], n[2], n[3], n[4], n[5]);
+            });
+
+            // 洞簫／竹笛悠揚旋律
+            const fluteNotes = [
+                [587.33, 32.8, 2.4, 0.18],
+                [659.25, 35.3, 1.2, 0.16],
+                [698.46, 36.6, 2.2, 0.19],
+                [659.25, 38.9, 1.5, 0.16],
+                [587.33, 40.5, 2.0, 0.18],
+                [523.25, 42.6, 1.6, 0.16],
+                [440.00, 44.3, 2.8, 0.17]
+            ];
+            fluteNotes.forEach(function(f) {
+                scheduleFlute(f[0], f[1], f[2], f[3]);
+            });
+
+            // 大鼓節奏點綴
+            [32.5, 36.5, 40.5, 44.5, 52.8].forEach(function(t) {
+                scheduleDrum(t, 0.32);
+            });
+
+            const renderedBuffer = await ctx.startRendering();
+            return audioBufferToWavBlob(renderedBuffer);
+        }
+
+        // 初始化並確保 <audio id="bgm-audio-player"> 綁定可播放的附件音檔來源
+        function ensureBgmAudioBound() {
+            if (bgmReadyPromise) return bgmReadyPromise;
+
+            bgmReadyPromise = (async function() {
+                const audioEl = getBgmAudioElement();
+                if (!audioEl) return;
+
+                // 先檢測同目錄下是否已有實體 Untitled_2.mp3 或 Untitled.mp3
+                const candidateFiles = ['Untitled_2.mp3', 'Untitled.mp3'];
+                for (let i = 0; i < candidateFiles.length; i++) {
+                    try {
+                        const res = await fetch(candidateFiles[i], { method: 'HEAD' });
+                        const contentType = (res.headers && res.headers.get('content-type')) || '';
+                        if (res.ok && !contentType.includes('text/html')) {
+                            audioEl.src = candidateFiles[i];
+                            return;
+                        }
+                    } catch (e) {
+                        // 預覽環境無外部實體檔時自動切換至內嵌音檔 Blob
+                    }
+                }
+
+                // 若在雲端預覽視窗中無法讀取外部路徑，立即將音軌封裝為 WAV Blob 並綁定至 <audio>
+                try {
+                    const wavBlob = await buildEmbeddedAttachmentAudioBlob();
+                    bgmBlobUrl = URL.createObjectURL(wavBlob);
+                    audioEl.src = bgmBlobUrl;
+                    audioEl.load();
+                } catch (err) {
+                    console.warn('音軌綁定建立失敗：', err);
+                }
+            })();
+
+            return bgmReadyPromise;
+        }
+
+        async function startBgmEngine() {
+            const audioEl = getBgmAudioElement();
+            if (!audioEl) return;
+            if (!bgmEnabled || !isBgmAllowedInCurrentView()) return;
+
+            await ensureBgmAudioBound();
+            if (!bgmEnabled || !isBgmAllowedInCurrentView()) return;
+
+            audioEl.volume = 0.82;
+            try {
+                await audioEl.play();
+            } catch (err) {
+                // 若因外部檔案路徑失敗，立即切換為內嵌 Blob 音檔再播一次
+                if (!bgmBlobUrl) {
+                    try {
+                        const wavBlob = await buildEmbeddedAttachmentAudioBlob();
+                        bgmBlobUrl = URL.createObjectURL(wavBlob);
+                        audioEl.src = bgmBlobUrl;
+                        audioEl.load();
+                        await audioEl.play();
+                    } catch (innerErr) {
+                        console.warn('背景音樂播放等待使用者互動：', innerErr);
+                    }
+                }
+            }
+        }
+
+        function stopBgmEngine() {
+            const audioEl = getBgmAudioElement();
+            if (audioEl) {
+                audioEl.pause();
+            }
+        }
+
+        function syncBgmWithView() {
+            const barEl = document.getElementById('bgm-floating-bar');
+            const btnEl = document.getElementById('bgm-toggle-btn');
+            const iconEl = document.getElementById('bgm-icon-wrap');
+            const textEl = document.getElementById('bgm-status-text');
+            const audioEl = getBgmAudioElement();
+
+            if (isBgmAllowedInCurrentView()) {
+                if (barEl) barEl.classList.remove('hidden');
+                if (bgmEnabled) {
+                    if (audioEl && audioEl.paused) {
+                        startBgmEngine();
+                    }
+                    if (iconEl) iconEl.textContent = '🎵';
+                    if (textEl) textEl.textContent = '音樂：開啟';
+                    if (btnEl) {
+                        btnEl.className = 'flex items-center gap-2 px-3.5 py-2 rounded-full bg-jade-500/25 hover:bg-jade-500/35 text-jade-300 border-2 border-jade-400 shadow-xl backdrop-blur-md transition text-xs sm:text-sm font-serif font-bold';
+                    }
+                } else {
+                    stopBgmEngine();
+                    if (iconEl) iconEl.textContent = '🔇';
+                    if (textEl) textEl.textContent = '音樂：關閉';
+                    if (btnEl) {
+                        btnEl.className = 'flex items-center gap-2 px-3.5 py-2 rounded-full bg-night-900/95 hover:bg-night-800 text-parchment-200 border-2 border-gold-500/40 shadow-xl backdrop-blur-md transition text-xs sm:text-sm font-serif font-bold';
+                    }
+                }
+            } else {
+                if (barEl) barEl.classList.add('hidden');
+                stopBgmEngine();
+            }
+        }
+
+        function toggleBgmPlayback() {
+            bgmEnabled = !bgmEnabled;
+            syncBgmWithView();
+            if (bgmEnabled) {
+                showToast('🎵 已開啟背景音樂（僅於首頁與目錄區播放）', 'jade');
+            } else {
+                showToast('🔇 已關閉背景音樂', 'gold');
+            }
+        }
+
+        function enterFromSplash(enableMusic) {
+            const overlay = document.getElementById('intro-splash-overlay');
+            const leftDoor = document.getElementById('intro-door-left');
+            const rightDoor = document.getElementById('intro-door-right');
+            const centerBox = document.getElementById('intro-center-box');
+
+            bgmEnabled = Boolean(enableMusic);
+            syncBgmWithView();
+
+            if (centerBox) {
+                centerBox.style.transition = 'all 0.45s ease';
+                centerBox.style.opacity = '0';
+                centerBox.style.transform = 'scale(0.92)';
+            }
+            if (leftDoor) leftDoor.classList.add('intro-door-open-left');
+            if (rightDoor) rightDoor.classList.add('intro-door-open-right');
+
+            setTimeout(function() {
+                if (overlay) overlay.classList.add('hidden');
+            }, 1150);
+        }
+
+        function replayIntroAnimation() {
+            const overlay = document.getElementById('intro-splash-overlay');
+            const leftDoor = document.getElementById('intro-door-left');
+            const rightDoor = document.getElementById('intro-door-right');
+            const centerBox = document.getElementById('intro-center-box');
+
+            if (leftDoor) leftDoor.classList.remove('intro-door-open-left');
+            if (rightDoor) rightDoor.classList.remove('intro-door-open-right');
+            if (centerBox) {
+                centerBox.style.opacity = '1';
+                centerBox.style.transform = 'scale(1)';
+            }
+            if (overlay) overlay.classList.remove('hidden');
+        }
+
+        function loadStateFromStorage() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    appState = {
+                        ...appState,
+                        ...parsed,
+                        userProfile: { ...appState.userProfile, ...(parsed.userProfile || {}) },
+                        workshopDraft: {
+                            ...appState.workshopDraft,
+                            ...(parsed.workshopDraft || {}),
+                            cards: {
+                                ...appState.workshopDraft.cards,
+                                ...(parsed.workshopDraft?.cards || {})
+                            },
+                            stages: {
+                                ...appState.workshopDraft.stages,
+                                ...(parsed.workshopDraft?.stages || {})
+                            }
+                        }
+                    };
+                }
+            } catch (err) {
+                console.warn('讀取本機存檔失敗，使用預設狀態：', err);
+            }
+        }
+
+        function saveStateToStorage() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+            } catch (err) {
+                console.warn('寫入本機存檔失敗：', err);
+            }
+        }
+
+        function addEnergy(amount, reasonText) {
+            appState.energy += amount;
+            saveStateToStorage();
+            updateHeaderStatus();
+            showToast('🔥 獲得 +' + amount + ' 鬼話能量！（' + reasonText + '）', 'jade');
+            checkAndUnlockBadges();
+        }
+
+        function checkAndUnlockBadges() {
+            const newlyUnlocked = [];
+            const tryUnlock = function(badgeId) {
+                if (!appState.unlockedBadges.includes(badgeId)) {
+                    appState.unlockedBadges.push(badgeId);
+                    newlyUnlocked.push(badgeId);
+                }
+            };
+
+            const storyBadgeMap = {
+                baishe: 'badge_baishe',
+                dingbo: 'badge_dingbo',
+                qiannv: 'badge_qiannv',
+                huapi: 'badge_huapi',
+                xiyou: 'badge_xiyou',
+                momotaro: 'badge_momotaro'
+            };
+
+            let hallFullClearedCount = 0;
+            STORIES_DATA.forEach(function(s) {
+                const p = appState.hallProgress[s.id] || {};
+                if (p.recognition && p.plotDetail && p.relationship && p.inference) {
+                    hallFullClearedCount++;
+                    tryUnlock(storyBadgeMap[s.id]);
+                }
+            });
+
+            if (hallFullClearedCount === 6) tryUnlock('badge_hall_all');
+
+            const mtClearedCount = Object.values(appState.mountainCleared).filter(Boolean).length;
+            if (mtClearedCount >= 1) tryUnlock('badge_mt_first');
+            if (mtClearedCount === 6) tryUnlock('badge_mt_all');
+
+            if (appState.multiverseExplored.length >= 6) tryUnlock('badge_mv_explorer');
+            if (appState.savedCreations.length >= 1) tryUnlock('badge_ws_first');
+            if (appState.energy >= 500) tryUnlock('badge_energy_500');
+
+            if (newlyUnlocked.length > 0) {
+                saveStateToStorage();
+                newlyUnlocked.forEach(function(id) {
+                    const b = BADGES_CONFIG.find(function(x) { return x.id === id; });
+                    if (b) {
+                        showToast('🏅 解鎖成就徽章：【' + b.icon + ' ' + b.title + '】！', 'gold');
+                    }
+                });
+            }
+        }
+
+        function updateHeaderStatus() {
+            let hallFullCleared = 0;
+            let totalTasksDone = 0;
+            STORIES_DATA.forEach(function(s) {
+                const p = appState.hallProgress[s.id] || {};
+                const c = [p.recognition, p.plotDetail, p.relationship, p.inference].filter(Boolean).length;
+                totalTasksDone += c;
+                if (c === 4) hallFullCleared++;
+            });
+
+            const mtClearedCount = Object.values(appState.mountainCleared).filter(Boolean).length;
+            const mvRatio = Math.min(appState.multiverseExplored.length, 6);
+            const wsRatio = Math.min(appState.savedCreations.length, 1) * 4;
+            const overallPct = Math.min(100, Math.round(((totalTasksDone + mtClearedCount + mvRatio + wsRatio) / 40) * 100));
+
+            const energyEl = document.getElementById('energy-display');
+            if (energyEl) energyEl.textContent = appState.energy;
+
+            const progEl = document.getElementById('overall-progress-display');
+            if (progEl) progEl.textContent = overallPct + '%';
+
+            const hallCountEl = document.getElementById('hall-progress-count');
+            if (hallCountEl) hallCountEl.textContent = hallFullCleared + ' / 6 篇';
+
+            let nextGoal = '';
+            if (hallFullCleared === 0) {
+                nextGoal = '📍 下一步目標：在「一、經典小說館」點選任一篇故事卡牌，完成四項閱讀挑戰！';
+            } else if (mtClearedCount === 0) {
+                nextGoal = '📍 下一步目標：前往「二、故事山闖關」，練習將故事卡牌排入五個結構階段！';
+            } else if (appState.multiverseExplored.length < 3) {
+                nextGoal = '📍 下一步目標：前往「三、劇情異世界」，體驗原作正史與假設情境的不同結局！';
+            } else if (appState.savedCreations.length === 0) {
+                nextGoal = '📍 下一步目標：前往「四、鬼話創作工坊」，抽取靈感卡並創作屬於你的故事成果卡！';
+            } else if (hallFullCleared < 6 || mtClearedCount < 6) {
+                nextGoal = '📍 下一步目標：繼續完成剩餘篇章（小說館 ' + hallFullCleared + '/6・故事山 ' + mtClearedCount + '/6），收集全套成就徽章！';
+            } else {
+                nextGoal = '🎉 恭喜！你已完成六大經典核心試煉，可隨時在創作工坊撰寫更多精彩故事！';
+            }
+            const bannerEl = document.getElementById('next-goal-banner');
+            if (bannerEl) bannerEl.textContent = nextGoal;
+
+            const userBadge = document.getElementById('user-badge-display');
+            if (userBadge && appState.userProfile && appState.userProfile.name) {
+                const cls = appState.userProfile.className ? appState.userProfile.className + '・' : '';
+                userBadge.textContent = '👤 ' + cls + appState.userProfile.name;
+            }
+
+            const statHall = document.getElementById('menu-stat-hall');
+            if (statHall) statHall.textContent = '通關進度：' + hallFullCleared + ' / 6 篇';
+            const statMt = document.getElementById('menu-stat-mountain');
+            if (statMt) statMt.textContent = '攀登進度：' + mtClearedCount + ' / 6 座';
+            const statMv = document.getElementById('menu-stat-multiverse');
+            if (statMv) statMv.textContent = '已探索：' + appState.multiverseExplored.length + ' / 18 分支';
+            const statWs = document.getElementById('menu-stat-workshop');
+            if (statWs) statWs.textContent = '已完成作品：' + appState.savedCreations.length + ' 篇';
+            const statAch = document.getElementById('menu-stat-achievements');
+            if (statAch) statAch.textContent = '已解鎖徽章：' + appState.unlockedBadges.length + ' / ' + BADGES_CONFIG.length + ' 枚';
+        }
+
+        function handleUserLogin() {
+            const nameInputEl = document.getElementById('login-name-input');
+            const classInputEl = document.getElementById('login-class-input');
+            const nameInput = nameInputEl ? nameInputEl.value.trim() : '';
+            const classInput = classInputEl ? classInputEl.value.trim() : '';
+
+            if (!nameInput) {
+                showToast('✍️ 請輸入您的姓名或暱稱以建立通行證（或點選訪客直接體驗）！', 'cinnabar');
+                if (nameInputEl) nameInputEl.focus();
+                return;
+            }
+
+            appState.userProfile = {
+                name: nameInput,
+                className: classInput
+            };
+            if (!appState.workshopDraft.author) {
+                appState.workshopDraft.author = nameInput;
+            }
+            saveStateToStorage();
+            showToast('🏮 歡迎【' + (classInput ? classInput + ' ' : '') + nameInput + '】進入經典小說大冒險！', 'jade');
+            goToMenuView();
+        }
+
+        function handleGuestLogin() {
+            if (!appState.userProfile || !appState.userProfile.name) {
+                appState.userProfile = {
+                    name: '鬼話冒險者',
+                    className: ''
+                };
+            }
+            saveStateToStorage();
+            showToast('🏮 已使用「訪客冒險者」身分登入！', 'gold');
+            goToMenuView();
+        }
+
+        function goToLandingView() {
+            appState.currentView = 'landing';
+            document.getElementById('view-landing').classList.remove('hidden');
+            document.getElementById('app-header').classList.add('hidden');
+            document.getElementById('view-menu').classList.add('hidden');
+            document.getElementById('view-feature').classList.add('hidden');
+
+            if (appState.userProfile && appState.userProfile.name) {
+                document.getElementById('login-name-input').value = appState.userProfile.name;
+                document.getElementById('login-class-input').value = appState.userProfile.className || '';
+                const hintBox = document.getElementById('returning-user-hint');
+                const hintText = document.getElementById('returning-user-text');
+                if (hintBox && hintText) {
+                    hintBox.classList.remove('hidden');
+                    hintText.textContent = '📌 偵測到上次登入紀錄：' + (appState.userProfile.className || '') + ' ' + appState.userProfile.name;
+                }
+            }
+            syncBgmWithView();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goToMenuView() {
+            appState.currentView = 'menu';
+            document.getElementById('view-landing').classList.add('hidden');
+            document.getElementById('app-header').classList.remove('hidden');
+            document.getElementById('view-menu').classList.remove('hidden');
+            document.getElementById('view-feature').classList.add('hidden');
+
+            const welcomeEl = document.getElementById('menu-welcome-title');
+            if (welcomeEl && appState.userProfile && appState.userProfile.name) {
+                const cls = appState.userProfile.className ? appState.userProfile.className + ' ' : '';
+                welcomeEl.textContent = '歡迎 ' + cls + appState.userProfile.name + '！請從下方選擇五大主題館開始探索：';
+            }
+            updateHeaderStatus();
+            syncBgmWithView();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleBackPreviousPage() {
+            if (appState.currentTab === 'hall' && appState.activeHallStoryId) {
+                renderHallCardsGrid();
+                updateBackBtnLabel();
+            } else {
+                goToMenuView();
+            }
+        }
+
+        function updateBackBtnLabel() {
+            const btnText = document.getElementById('back-prev-btn-text');
+            if (!btnText) return;
+            if (appState.currentTab === 'hall' && appState.activeHallStoryId) {
+                btnText.textContent = '返回上一頁（六篇小說列表）';
+            } else {
+                btnText.textContent = '返回上一頁（五館目錄）';
+            }
+        }
+
+        function switchTab(tabName) {
+            appState.currentView = 'feature';
+            appState.currentTab = tabName;
+
+            document.getElementById('view-landing').classList.add('hidden');
+            document.getElementById('app-header').classList.remove('hidden');
+            document.getElementById('view-menu').classList.add('hidden');
+            document.getElementById('view-feature').classList.remove('hidden');
+
+            const tabs = ['hall', 'mountain', 'multiverse', 'workshop', 'achievements'];
+            tabs.forEach(function(t) {
+                const sec = document.getElementById('section-' + t);
+                const btn = document.getElementById('tab-btn-' + t);
+                if (t === tabName) {
+                    sec.classList.remove('hidden');
+                    btn.className = 'tab-btn flex items-center gap-1 px-3 py-1.5 rounded-xl font-serif font-bold text-xs whitespace-nowrap transition-all bg-gradient-to-r from-gold-500 to-amber-600 text-night-950 shadow-md';
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = 'tab-btn flex items-center gap-1 px-3 py-1.5 rounded-xl font-serif font-bold text-xs whitespace-nowrap transition-all bg-night-800 text-parchment-200 hover:bg-night-700 border border-gold-500/20';
+                }
+            });
+
+            if (tabName === 'hall') {
+                if (appState.activeHallStoryId) {
+                    renderHallMissionPanel(appState.activeHallStoryId);
+                } else {
+                    renderHallCardsGrid();
+                }
+            } else if (tabName === 'mountain') {
+                renderMountainSection();
+            } else if (tabName === 'multiverse') {
+                renderMultiverseSection();
+            } else if (tabName === 'workshop') {
+                renderWorkshopSection();
+            } else if (tabName === 'achievements') {
+                renderAchievementsSection();
+            }
+            updateBackBtnLabel();
+            updateHeaderStatus();
+            syncBgmWithView();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function jumpToFeatureWithStory(tabName, storyId) {
+            if (tabName === 'mountain') {
+                appState.activeMountainStoryId = storyId;
+                initMountainSession(storyId);
+            } else if (tabName === 'multiverse') {
+                appState.activeMultiverseStoryId = storyId;
+            }
+            switchTab(tabName);
+        }
+
+        function renderHallCardsGrid() {
+            appState.activeHallStoryId = null;
+            document.getElementById('hall-cards-grid').classList.remove('hidden');
+            document.getElementById('hall-mission-panel').classList.add('hidden');
+            updateBackBtnLabel();
+
+            const container = document.getElementById('hall-cards-grid');
+            container.innerHTML = STORIES_DATA.map(function(story) {
+                const p = appState.hallProgress[story.id] || {};
+                const doneCount = [p.recognition, p.plotDetail, p.relationship, p.inference].filter(Boolean).length;
+                const isAllCleared = doneCount === 4;
+
+                const charHtml = story.characters.map(function(cName) {
+                    return '<div class="px-3 py-2 rounded-xl bg-night-950/85 border border-gold-500/25 flex items-center justify-center text-xs sm:text-sm">' +
+                           '<span class="font-serif font-bold text-parchment-50">👤 ' + cName + '</span>' +
+                           '</div>';
+                }).join('');
+
+                const sealStampHtml = isAllCleared
+                    ? '<div class="absolute top-3 right-14 z-10 px-3 py-1 rounded-lg seal-badge font-serif font-black text-xs sm:text-sm pointer-events-none select-none">' +
+                        '💮 已封印' +
+                      '</div>'
+                    : '';
+
+                return '<div class="oriental-card rounded-2xl overflow-hidden flex flex-col justify-between group relative ' + (isAllCleared ? 'ring-2 ring-cinnabar-500/70' : '') + '">' +
+                    sealStampHtml +
+                    '<div>' +
+                        '<div class="bg-gradient-to-r ' + story.themeColor + ' p-4 relative border-b border-gold-500/30 cursor-pointer" onclick="openHallStoryMission(\'' + story.id + '\')">' +
+                            '<div class="flex items-start justify-between">' +
+                                '<span class="text-xs font-serif font-bold px-2.5 py-0.5 rounded-full bg-black/40 text-gold-400 border border-gold-400/40">' +
+                                    '卷' + story.num + '・' + story.era +
+                                '</span>' +
+                                '<span class="text-3xl transform group-hover:scale-110 transition">' + story.icon + '</span>' +
+                            '</div>' +
+                            '<h3 class="font-serif font-black text-xl text-white mt-2 tracking-wide">' + story.title + '</h3>' +
+                            '<p class="text-xs text-parchment-100/90 mt-0.5">' + story.subtitle + '</p>' +
+                        '</div>' +
+                        '<div class="p-4 space-y-3">' +
+                            '<div class="flex items-center justify-between">' +
+                                '<span class="text-xs font-serif font-bold text-gold-400 flex items-center gap-1">' +
+                                    '<i class="ph-fill ph-users-three"></i> 登場人物卡' +
+                                '</span>' +
+                                '<button type="button" onclick="event.stopPropagation(); openSecretBookModal(\'' + story.id + '\')" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 flex items-center gap-1 transition">' +
+                                    '<i class="ph-fill ph-book-open-text"></i> 故事參考秘笈' +
+                                '</button>' +
+                            '</div>' +
+                            '<div class="grid grid-cols-2 gap-2">' + charHtml + '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="px-4 py-3 bg-night-950/60 border-t border-gold-500/20 flex items-center justify-between">' +
+                        '<div class="flex items-center gap-1.5 text-xs">' +
+                            '<span class="' + (isAllCleared ? 'text-rose-400 font-bold' : 'text-gold-400') + '">' +
+                                (isAllCleared ? '💮 完成封印 (4 / 4)' : '📊 任務進度：' + doneCount + ' / 4') +
+                            '</span>' +
+                        '</div>' +
+                        '<button type="button" onclick="openHallStoryMission(\'' + story.id + '\')" class="text-xs font-serif font-bold px-3.5 py-1.5 rounded-lg ' + (isAllCleared ? 'bg-cinnabar-600/30 text-rose-200 border border-cinnabar-500/50' : 'bg-gold-500 text-night-950') + ' hover:brightness-110 transition">' +
+                            (isAllCleared ? '檢視封印 ➔' : '進入答題試煉 ➔') +
+                        '</button>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function openSecretBookModal(storyId) {
+            const targetId = storyId || appState.activeHallStoryId || 'baishe';
+            const modal = document.getElementById('secret-book-modal');
+            modal.classList.remove('hidden');
+            renderSecretBookContent(targetId);
+        }
+
+        function closeSecretBookModal() {
+            document.getElementById('secret-book-modal').classList.add('hidden');
+        }
+
+        function renderSecretBookContent(storyId) {
+            const story = STORIES_DATA.find(function(s) { return s.id === storyId; }) || STORIES_DATA[0];
+
+            const tabsEl = document.getElementById('secret-book-tabs');
+            tabsEl.innerHTML = STORIES_DATA.map(function(s) {
+                return '<button type="button" onclick="renderSecretBookContent(\'' + s.id + '\')" class="px-3 py-1.5 rounded-xl font-serif font-bold text-xs whitespace-nowrap transition ' + (s.id === story.id ? 'bg-amber-900 text-gold-400 shadow' : 'bg-white/60 text-parchment-900 hover:bg-white') + '">' +
+                    s.icon + ' ' + s.title +
+                '</button>';
+            }).join('');
+
+            const contentEl = document.getElementById('secret-book-content');
+            const charBadges = story.characters.map(function(cName) {
+                return '<div class="px-3.5 py-1.5 rounded-xl bg-amber-900/10 border border-amber-800/30 font-serif font-bold text-parchment-900 text-sm">👤 ' + cName + '</div>';
+            }).join('');
+
+            contentEl.innerHTML =
+                '<div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-amber-800/30 pb-3">' +
+                    '<div class="flex items-center gap-2.5">' +
+                        '<span class="text-3xl">' + story.icon + '</span>' +
+                        '<div>' +
+                            '<h4 class="font-serif font-black text-xl sm:text-2xl text-parchment-900">' + story.title + ' — ' + story.subtitle + '</h4>' +
+                            '<span class="text-xs font-bold text-amber-800">出處與時代：' + story.era + '</span>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="space-y-2">' +
+                    '<h5 class="font-serif font-bold text-sm text-amber-900 flex items-center gap-1.5"><span>👥</span> 【核心人物卡】</h5>' +
+                    '<div class="flex flex-wrap gap-2">' + charBadges + '</div>' +
+                '</div>' +
+                '<div class="space-y-2 bg-white/75 p-4 rounded-2xl border border-amber-800/30">' +
+                    '<h5 class="font-serif font-bold text-sm text-amber-900 flex items-center gap-1.5"><span>📜</span> 【原作情節完整秘笈】（答題重要依據）</h5>' +
+                    '<p class="text-sm text-parchment-900 leading-relaxed font-medium">' + story.summary + '</p>' +
+                '</div>' +
+                '<div class="space-y-2 bg-amber-900/10 p-4 rounded-2xl border border-amber-800/25">' +
+                    '<h5 class="font-serif font-bold text-sm text-amber-900 flex items-center gap-1.5"><span>🧭</span> 【故事發展脈絡與核心主旨】</h5>' +
+                    '<ul class="text-xs sm:text-sm space-y-1.5 text-parchment-900">' +
+                        '<li><strong>① 開端：</strong>' + story.storyMountain.beginning.text + '</li>' +
+                        '<li><strong>② 發展：</strong>' + story.storyMountain.development.text + '</li>' +
+                        '<li><strong>③ 高潮：</strong>' + story.storyMountain.climax.text + '</li>' +
+                        '<li><strong>④ 結局：</strong>' + story.storyMountain.ending.text + '</li>' +
+                        '<li><strong>💡 主題省思：</strong>' + story.storyMountain.theme.text + '</li>' +
+                    '</ul>' +
+                '</div>';
+        }
+
+        function openHallStoryMission(storyId) {
+            appState.activeHallStoryId = storyId;
+            document.getElementById('hall-cards-grid').classList.add('hidden');
+            const panel = document.getElementById('hall-mission-panel');
+            panel.classList.remove('hidden');
+
+            renderHallMissionPanel(storyId);
+            updateBackBtnLabel();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderHallMissionPanel(storyId) {
+            const story = STORIES_DATA.find(function(s) { return s.id === storyId; });
+            if (!story) return;
+
+            if (!appState.hallProgress[storyId]) {
+                appState.hallProgress[storyId] = { recognition: false, plotDetail: false, relationship: false, inference: false };
+            }
+            const p = appState.hallProgress[storyId];
+            const score = [p.recognition, p.plotDetail, p.relationship, p.inference].filter(Boolean).length * 25;
+
+            const charTags = story.characters.map(function(c) {
+                return '<span class="px-3 py-1 rounded-full bg-amber-900/15 text-parchment-900 font-bold border border-amber-900/30">👤 ' + c + '</span>';
+            }).join('');
+
+            const panel = document.getElementById('hall-mission-panel');
+            panel.innerHTML =
+                '<div class="oriental-card rounded-2xl p-5 sm:p-6 space-y-4">' +
+                    '<div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold-500/30 pb-4">' +
+                        '<div class="flex flex-wrap items-center gap-2">' +
+                            '<button type="button" onclick="renderHallCardsGrid()" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-gold-400 hover:text-gold-300 bg-night-950 px-3.5 py-2 rounded-xl border border-gold-500/40 transition">' +
+                                '<i class="ph-bold ph-arrow-left"></i>' +
+                                '<span>回上頁（六篇小說列表）</span>' +
+                            '</button>' +
+                            '<button type="button" onclick="goToMenuView()" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-parchment-200 hover:text-white bg-night-800 px-3 py-2 rounded-xl border border-gold-500/30 transition">' +
+                                '<i class="ph-bold ph-squares-four"></i>' +
+                                '<span>回五館目錄頁</span>' +
+                            '</button>' +
+                        '</div>' +
+                        '<div class="flex flex-wrap items-center gap-2">' +
+                            '<button type="button" onclick="openSecretBookModal(\'' + story.id + '\')" class="btn-game bg-gradient-to-r from-amber-500 to-gold-500 text-night-950 font-serif font-black px-4 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-1.5">' +
+                                '<i class="ph-fill ph-book-open-text text-lg"></i>' +
+                                '<span>📖 點選查看' + story.title + '故事參考秘笈</span>' +
+                            '</button>' +
+                            '<div class="bg-night-950 px-3 py-1.5 rounded-xl border border-gold-500/40 text-xs">' +
+                                '得分：<span id="story-score-badge" class="font-serif font-black text-base text-gold-400">' + score + '</span> / 100' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="parchment-panel rounded-xl p-4 sm:p-5 space-y-3">' +
+                        '<div class="flex flex-wrap items-center justify-between gap-2">' +
+                            '<div class="flex items-center gap-2.5">' +
+                                '<span class="text-3xl">' + story.icon + '</span>' +
+                                '<div>' +
+                                    '<h3 class="font-serif font-black text-xl sm:text-2xl text-parchment-900">' + story.title + ' — ' + story.subtitle + '</h3>' +
+                                    '<span class="text-xs font-bold text-amber-800">' + story.era + '｜作答時若忘記細節，請點選右上角「📖 故事參考秘笈」</span>' +
+                                '</div>' +
+                            '</div>' +
+                            (score === 100 ? '<span class="px-3 py-1 rounded-lg seal-badge font-serif font-black text-xs">💮 已完成封印</span>' : '') +
+                        '</div>' +
+                        '<div class="pt-1 flex flex-wrap items-center gap-2 text-xs">' +
+                            '<span class="font-serif font-bold text-parchment-900">👥 登場人物卡：</span>' + charTags +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="grid grid-cols-1 lg:grid-cols-2 gap-5">' +
+                    renderMCQCard(story, 'recognition', '任務一：人物辨識', '👤', p.recognition) +
+                    renderMCQCard(story, 'plotDetail', '任務二：關鍵情節', '📜', p.plotDetail) +
+                    renderMCQCard(story, 'relationship', '任務三：人物關係', '🤝', p.relationship) +
+                    renderMCQCard(story, 'inference', '任務四：閱讀推理', '🔍', p.inference) +
+                '</div>';
+        }
+
+        function renderMCQCard(story, taskKey, titleLabel, icon, isCleared) {
+            const m = story.missions[taskKey];
+            const letters = ['A', 'B', 'C', 'D'];
+            const optsHtml = m.options.map(function(opt, idx) {
+                return '<button type="button" onclick="checkHallMCQ(\'' + story.id + '\', \'' + taskKey + '\', ' + idx + ')" ' +
+                    'class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm bg-night-950/80 hover:bg-night-800 border border-gold-500/25 hover:border-gold-400 transition flex items-start gap-2.5">' +
+                    '<span class="font-serif font-bold text-gold-400 shrink-0">' + letters[idx] + '.</span>' +
+                    '<span class="text-parchment-100">' + opt + '</span>' +
+                '</button>';
+            }).join('');
+
+            return '<div class="oriental-card rounded-2xl p-5 flex flex-col justify-between space-y-4">' +
+                '<div class="space-y-3">' +
+                    '<div class="flex items-center justify-between border-b border-gold-500/20 pb-2.5">' +
+                        '<span class="font-serif font-bold text-base text-gold-400 flex items-center gap-2"><span>' + icon + '</span> ' + titleLabel + '</span>' +
+                        '<span id="status-' + story.id + '-' + taskKey + '" class="text-xs font-bold px-2.5 py-0.5 rounded-full ' + (isCleared ? 'bg-jade-500/20 text-jade-400 border border-jade-500/40' : 'bg-night-950 text-parchment-200/70') + '">' +
+                            (isCleared ? '✅ 已通過 (+25分)' : '尚未通過') +
+                        '</span>' +
+                    '</div>' +
+                    '<p class="text-sm font-medium text-parchment-50 leading-relaxed">' + m.question + '</p>' +
+                    '<div class="space-y-2 pt-1">' + optsHtml + '</div>' +
+                '</div>' +
+                '<div id="feedback-' + story.id + '-' + taskKey + '" class="' + (isCleared ? '' : 'hidden') + ' p-3.5 rounded-xl text-xs leading-relaxed ' + (isCleared ? 'bg-jade-500/15 border border-jade-500/40 text-jade-200' : '') + '">' +
+                    (isCleared ? '<strong>💡 詳解：</strong>' + m.explanation : '') +
+                '</div>' +
+            '</div>';
+        }
+
+        function checkHallMCQ(storyId, taskKey, selectedIdx) {
+            const story = STORIES_DATA.find(function(s) { return s.id === storyId; });
+            if (!story) return;
+            const m = story.missions[taskKey];
+            const fbEl = document.getElementById('feedback-' + storyId + '-' + taskKey);
+            const stEl = document.getElementById('status-' + storyId + '-' + taskKey);
+
+            if (selectedIdx === m.answer) {
+                const firstTime = !(appState.hallProgress[storyId] && appState.hallProgress[storyId][taskKey]);
+                appState.hallProgress[storyId][taskKey] = true;
+                saveStateToStorage();
+
+                fbEl.className = 'p-3.5 rounded-xl text-xs leading-relaxed bg-jade-500/15 border border-jade-500/40 text-jade-200';
+                fbEl.innerHTML = '<strong>🎉 答對了！解析：</strong>' + m.explanation;
+                stEl.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-jade-500/20 text-jade-400 border border-jade-500/40';
+                stEl.textContent = '✅ 已通過 (+25分)';
+
+                updateStoryScoreBadge(storyId);
+                if (firstTime) {
+                    addEnergy(25, story.title + '閱讀任務通過');
+                } else {
+                    showToast('✅ 答案正確！溫故知新！', 'jade');
+                }
+
+                const p = appState.hallProgress[storyId] || {};
+                const allFourDone = p.recognition && p.plotDetail && p.relationship && p.inference;
+                if (allFourDone) {
+                    triggerStorySealComplete(story);
+                }
+            } else {
+                fbEl.className = 'p-3.5 rounded-xl text-xs leading-relaxed bg-cinnabar-600/20 border border-cinnabar-500/50 text-rose-200';
+                fbEl.innerHTML = '<strong>❌ 再想一想：</strong>這個選項不太符合原作情節喔！可以點選右上角「📖 故事參考秘笈」查閱提示。';
+            }
+        }
+
+        let sealAutoReturnTimer = null;
+
+        function triggerStorySealComplete(story) {
+            const modal = document.getElementById('seal-complete-modal');
+            const iconEl = document.getElementById('seal-modal-icon');
+            const titleEl = document.getElementById('seal-modal-title');
+            if (iconEl) iconEl.textContent = story.icon;
+            if (titleEl) titleEl.textContent = story.title + '・完成封印！';
+            if (modal) modal.classList.remove('hidden');
+
+            if (sealAutoReturnTimer) clearTimeout(sealAutoReturnTimer);
+            sealAutoReturnTimer = setTimeout(function() {
+                closeSealModalAndReturn();
+            }, 2200);
+        }
+
+        function closeSealModalAndReturn() {
+            if (sealAutoReturnTimer) {
+                clearTimeout(sealAutoReturnTimer);
+                sealAutoReturnTimer = null;
+            }
+            const modal = document.getElementById('seal-complete-modal');
+            if (modal) modal.classList.add('hidden');
+            renderHallCardsGrid();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateStoryScoreBadge(storyId) {
+            const p = appState.hallProgress[storyId] || {};
+            const score = [p.recognition, p.plotDetail, p.relationship, p.inference].filter(Boolean).length * 25;
+            const badge = document.getElementById('story-score-badge');
+            if (badge) badge.textContent = score;
+            updateHeaderStatus();
+            checkAndUnlockBadges();
+        }
+
+        const MOUNTAIN_STAGE_META = [
+            { key: 'beginning', num: '①', name: '開端（背景與起因）', icon: '🌱' },
+            { key: 'development', num: '②', name: '發展（衝突與轉折）', icon: '🌊' },
+            { key: 'climax', num: '③', name: '高潮（最激烈的對決或危機）', icon: '⚡' },
+            { key: 'ending', num: '④', name: '結局（事件的最終結果）', icon: '🏁' },
+            { key: 'theme', num: '⑤', name: '主題與反思（核心啟示）', icon: '💡' }
+        ];
+
+        function initMountainSession(storyId) {
+            const story = STORIES_DATA.find(function(s) { return s.id === storyId; }) || STORIES_DATA[0];
+            appState.activeMountainStoryId = story.id;
+            const sm = story.storyMountain;
+            const cards = [sm.beginning, sm.development, sm.climax, sm.ending, sm.theme];
+            mountainPoolState = cards.slice().sort(function() { return Math.random() - 0.5; });
+            mountainPlacedState = {
+                beginning: null,
+                development: null,
+                climax: null,
+                ending: null,
+                theme: null
+            };
+            selectedMountainCardId = null;
+        }
+
+        function selectMountainStory(storyId) {
+            initMountainSession(storyId);
+            renderMountainSection();
+        }
+
+        function renderMountainSection() {
+            const story = STORIES_DATA.find(function(s) { return s.id === appState.activeMountainStoryId; }) || STORIES_DATA[0];
+
+            const tabsEl = document.getElementById('mountain-story-tabs');
+            tabsEl.innerHTML = STORIES_DATA.map(function(s) {
+                const isCleared = appState.mountainCleared[s.id];
+                const isActive = s.id === story.id;
+                return '<button type="button" onclick="selectMountainStory(\'' + s.id + '\')" ' +
+                    'class="px-4 py-2 rounded-xl font-serif font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-1.5 ' + (isActive ? 'bg-jade-500 text-night-950 shadow-lg' : 'bg-night-800 text-parchment-200 hover:bg-night-700 border border-gold-500/25') + '">' +
+                    '<span>' + s.icon + '</span>' +
+                    '<span>' + s.title + '</span>' +
+                    (isCleared ? '<span class="text-xs">✅</span>' : '') +
+                '</button>';
+            }).join('');
+
+            const poolHtml = mountainPoolState.length === 0
+                ? '<div class="h-44 rounded-xl border-2 border-dashed border-jade-500/40 flex flex-col items-center justify-center text-jade-400 text-xs sm:text-sm p-4 text-center">' +
+                    '<span class="text-2xl mb-1">✨</span>' +
+                    '<span>所有卡牌皆已放入故事山！請點擊右側「驗證故事山結構」按鈕。</span>' +
+                  '</div>'
+                : mountainPoolState.map(function(c) {
+                    const isSelected = selectedMountainCardId === c.id;
+                    return '<div draggable="true" ondragstart="handleMountainDragStart(event, \'' + c.id + '\')" onclick="handleMountainCardClick(\'' + c.id + '\')" ' +
+                        'class="p-3.5 rounded-xl cursor-pointer transition select-none text-xs sm:text-sm leading-relaxed ' + (isSelected ? 'bg-gold-500/25 border-2 border-gold-400 shadow-lg' : 'bg-night-950/90 hover:bg-night-800 border border-gold-500/30') + '">' +
+                        '<div class="flex items-start gap-2">' +
+                            '<span class="text-gold-400 font-bold shrink-0">🎴</span>' +
+                            '<span class="text-parchment-50">' + c.text + '</span>' +
+                        '</div>' +
+                    '</div>';
+                }).join('');
+
+            const slotsHtml = MOUNTAIN_STAGE_META.map(function(stage) {
+                const placed = mountainPlacedState[stage.key];
+                const slotRight = placed
+                    ? '<button type="button" onclick="event.stopPropagation(); removeCardFromSlot(\'' + stage.key + '\')" class="text-[11px] text-rose-400 hover:underline flex items-center gap-0.5"><i class="ph-bold ph-arrow-u-up-left"></i> 退回卡池</button>'
+                    : '<span class="text-[11px] text-parchment-200/50">' + (selectedMountainCardId ? '👉 點此放入選中卡牌' : '等待放入卡牌...') + '</span>';
+
+                return '<div ondragover="event.preventDefault()" ondrop="handleMountainDrop(event, \'' + stage.key + '\')" onclick="handleMountainSlotClick(\'' + stage.key + '\')" ' +
+                    'class="p-3.5 rounded-xl border-2 transition cursor-pointer ' + (placed ? 'bg-night-900 border-gold-500/50' : (selectedMountainCardId ? 'bg-gold-500/10 border-dashed border-gold-400 animate-pulse' : 'bg-night-950/60 border-dashed border-gold-500/30 hover:border-gold-400/60')) + '">' +
+                    '<div class="flex items-center justify-between mb-1.5">' +
+                        '<span class="font-serif font-bold text-xs sm:text-sm text-gold-400 flex items-center gap-1.5"><span>' + stage.icon + '</span><span>' + stage.num + ' ' + stage.name + '</span></span>' +
+                        slotRight +
+                    '</div>' +
+                    (placed ? '<p class="text-xs sm:text-sm text-parchment-50 bg-night-950/90 p-2.5 rounded-lg border border-gold-500/20">' + placed.text + '</p>' : '') +
+                '</div>';
+            }).join('');
+
+            const container = document.getElementById('mountain-game-container');
+            container.innerHTML =
+                '<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">' +
+                    '<div class="lg:col-span-5 oriental-card rounded-2xl p-5 space-y-4">' +
+                        '<div class="flex items-center justify-between border-b border-gold-500/20 pb-3">' +
+                            '<h3 class="font-serif font-bold text-base text-gold-400 flex items-center gap-2"><i class="ph-fill ph-cards text-lg"></i><span>待放入的故事卡牌池 (' + mountainPoolState.length + ')</span></h3>' +
+                            '<button type="button" onclick="selectMountainStory(\'' + story.id + '\')" class="text-xs text-parchment-200 hover:text-gold-400 flex items-center gap-1"><i class="ph-bold ph-arrows-clockwise"></i> 重新洗牌</button>' +
+                        '</div>' +
+                        '<p class="text-xs text-parchment-200/80">💡 操作方式：<strong>點選下方任一張卡牌</strong>（會亮起金框），再<strong>點選右側對應的故事山階段格子</strong>即可放入！（電腦亦支援直接拖曳）</p>' +
+                        '<div class="space-y-2.5 min-h-[220px]">' + poolHtml + '</div>' +
+                    '</div>' +
+                    '<div class="lg:col-span-7 oriental-card rounded-2xl p-5 space-y-4">' +
+                        '<div class="flex items-center justify-between border-b border-gold-500/20 pb-3">' +
+                            '<h3 class="font-serif font-bold text-base text-jade-400 flex items-center gap-2"><span>⛰️</span><span>' + story.title + ' — 故事山五階段配置圖</span></h3>' +
+                            '<span class="text-xs ' + (appState.mountainCleared[story.id] ? 'text-jade-400 font-bold' : 'text-parchment-200/70') + '">' +
+                                (appState.mountainCleared[story.id] ? '🏆 本座故事山已通關' : '請依序放入 5 張卡牌') +
+                            '</span>' +
+                        '</div>' +
+                        '<div class="space-y-3">' + slotsHtml + '</div>' +
+                        '<div id="mountain-feedback-box" class="hidden p-4 rounded-xl text-xs sm:text-sm leading-relaxed"></div>' +
+                        '<div class="pt-2 flex flex-wrap gap-3">' +
+                            '<button type="button" onclick="verifyMountainOrder(\'' + story.id + '\')" class="btn-game flex-1 bg-gradient-to-r from-jade-500 to-emerald-600 text-night-950 font-serif font-black py-3 px-5 rounded-xl text-sm flex items-center justify-center gap-2">' +
+                                '<i class="ph-bold ph-check-circle text-lg"></i><span>驗證故事山五階段結構</span>' +
+                            '</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+        }
+
+        function handleMountainCardClick(cardId) {
+            selectedMountainCardId = (selectedMountainCardId === cardId) ? null : cardId;
+            renderMountainSection();
+        }
+
+        function handleMountainDragStart(event, cardId) {
+            selectedMountainCardId = cardId;
+            event.dataTransfer.setData('text/plain', cardId);
+        }
+
+        function handleMountainDrop(event, stageKey) {
+            event.preventDefault();
+            const cardId = event.dataTransfer.getData('text/plain') || selectedMountainCardId;
+            if (cardId) placeCardIntoSlot(cardId, stageKey);
+        }
+
+        function handleMountainSlotClick(stageKey) {
+            if (!selectedMountainCardId) return;
+            placeCardIntoSlot(selectedMountainCardId, stageKey);
+        }
+
+        function placeCardIntoSlot(cardId, stageKey) {
+            const cardIdx = mountainPoolState.findIndex(function(c) { return c.id === cardId; });
+            if (cardIdx === -1) return;
+            const cardObj = mountainPoolState[cardIdx];
+
+            if (mountainPlacedState[stageKey]) {
+                mountainPoolState.push(mountainPlacedState[stageKey]);
+            }
+            mountainPoolState.splice(cardIdx, 1);
+            mountainPlacedState[stageKey] = cardObj;
+            selectedMountainCardId = null;
+            renderMountainSection();
+        }
+
+        function removeCardFromSlot(stageKey) {
+            if (!mountainPlacedState[stageKey]) return;
+            mountainPoolState.push(mountainPlacedState[stageKey]);
+            mountainPlacedState[stageKey] = null;
+            renderMountainSection();
+        }
+
+        function verifyMountainOrder(storyId) {
+            const story = STORIES_DATA.find(function(s) { return s.id === storyId; });
+            const sm = story.storyMountain;
+            const keys = ['beginning', 'development', 'climax', 'ending', 'theme'];
+
+            const allFilled = keys.every(function(k) { return mountainPlacedState[k] !== null; });
+            const fbBox = document.getElementById('mountain-feedback-box');
+
+            if (!allFilled) {
+                fbBox.className = 'p-4 rounded-xl text-xs sm:text-sm leading-relaxed bg-amber-500/20 border border-amber-500/50 text-amber-200';
+                fbBox.innerHTML = '⚠️ 請先將左側 5 張劇情卡牌全部放入右側的五個階段格子中，再進行驗證喔！';
+                return;
+            }
+
+            let correctCount = 0;
+            keys.forEach(function(k) {
+                if (mountainPlacedState[k] && mountainPlacedState[k].id === sm[k].id) correctCount++;
+            });
+
+            if (correctCount === 5) {
+                const firstTime = !appState.mountainCleared[storyId];
+                appState.mountainCleared[storyId] = true;
+                saveStateToStorage();
+
+                fbBox.className = 'p-4 rounded-xl text-xs sm:text-sm leading-relaxed bg-jade-500/20 border border-jade-500/50 text-jade-200';
+                fbBox.innerHTML = '🎉 <strong>恭喜完美登頂！</strong>你精準掌握了' + story.title + '從開端、發展、高潮、結局到核心主題的完整脈絡！';
+
+                if (firstTime) {
+                    addEnergy(50, '成功攀登' + story.title + '故事山');
+                } else {
+                    showToast('⛰️ 故事山五階段排列完全正確！', 'jade');
+                }
+                checkAndUnlockBadges();
+            } else {
+                fbBox.className = 'p-4 rounded-xl text-xs sm:text-sm leading-relaxed bg-cinnabar-600/20 border border-cinnabar-500/50 text-rose-200';
+                fbBox.innerHTML = '🔍 目前答對了 <strong>' + correctCount + ' / 5</strong> 個階段。提示：「高潮」通常是衝突最激烈的一刻，「主題與反思」則是整篇故事帶給我們的啟示！可點擊退回卡池重新調整。';
+            }
+        }
+
+        function selectMultiverseStory(storyId) {
+            appState.activeMultiverseStoryId = storyId;
+            renderMultiverseSection();
+        }
+
+        function renderMultiverseSection() {
+            const story = STORIES_DATA.find(function(s) { return s.id === appState.activeMultiverseStoryId; }) || STORIES_DATA[0];
+            const mv = story.multiverse;
+
+            const tabsEl = document.getElementById('multiverse-story-tabs');
+            tabsEl.innerHTML = STORIES_DATA.map(function(s) {
+                const exploredCount = s.multiverse.branches.filter(function(b) { return appState.multiverseExplored.includes(b.id); }).length;
+                const isActive = s.id === story.id;
+                return '<button type="button" onclick="selectMultiverseStory(\'' + s.id + '\')" ' +
+                    'class="px-4 py-2 rounded-xl font-serif font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-1.5 ' + (isActive ? 'bg-cinnabar-500 text-white shadow-lg' : 'bg-night-800 text-parchment-200 hover:bg-night-700 border border-gold-500/25') + '">' +
+                    '<span>' + s.icon + '</span><span>' + s.title + '</span><span class="text-[11px] opacity-80">(' + exploredCount + '/3)</span>' +
+                '</button>';
+            }).join('');
+
+            const branchesHtml = mv.branches.map(function(b) {
+                const isExplored = appState.multiverseExplored.includes(b.id);
+                const isCanon = b.type === 'canon';
+                const actionButtonHtml = isExplored
+                    ? ''
+                    : '<div class="mt-4 pt-3 border-t border-white/10">' +
+                        '<button type="button" onclick="exploreMultiverseBranch(\'' + b.id + '\')" class="w-full py-2 px-3 rounded-xl font-serif font-bold text-xs sm:text-sm ' + (isCanon ? 'bg-gold-500/20 hover:bg-gold-500/30 text-gold-300 border border-gold-500/40' : 'bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 border border-purple-400/40') + ' transition">' +
+                            '選擇此決定並展開結局 (+15能量)' +
+                        '</button>' +
+                      '</div>';
+
+                return '<div class="rounded-2xl p-5 flex flex-col justify-between border-2 transition ' + (isCanon ? 'bg-amber-950/40 border-gold-500/60' : 'bg-night-950/80 border-purple-500/40') + '">' +
+                    '<div class="space-y-3">' +
+                        '<div class="flex items-center justify-between">' +
+                            '<span class="text-xs font-bold px-2.5 py-0.5 rounded-full ' + (isCanon ? 'bg-gold-500 text-night-950' : 'bg-purple-500/30 text-purple-200 border border-purple-400/40') + '">' + b.badge + '</span>' +
+                            (isExplored ? '<span class="text-xs text-jade-400 font-bold">✓ 已探索</span>' : '') +
+                        '</div>' +
+                        '<h4 class="font-serif font-bold text-base text-parchment-50 leading-snug">「' + b.choiceTitle + '」</h4>' +
+                    '</div>' +
+                    actionButtonHtml +
+                    '<div id="mv-result-' + b.id + '" class="' + (isExplored ? '' : 'hidden') + ' mt-4 pt-3 border-t border-gold-500/20 space-y-2 text-xs leading-relaxed">' +
+                        '<p class="text-parchment-100"><strong class="text-gold-400">🎬 結局走向：</strong>' + b.outcome + '</p>' +
+                        '<p class="text-jade-300 bg-jade-500/10 p-2.5 rounded-lg border border-jade-500/30"><strong>💡 思辨啟示：</strong>' + b.insight + '</p>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+
+            const container = document.getElementById('multiverse-content-container');
+            container.innerHTML =
+                '<div class="oriental-card rounded-2xl p-5 sm:p-6 space-y-5">' +
+                    '<div class="border-b border-gold-500/30 pb-4">' +
+                        '<span class="text-xs font-bold text-gold-400">⚡ ' + story.title + '・關鍵命運分岔點</span>' +
+                        '<h3 class="font-serif font-bold text-lg sm:text-xl text-parchment-50 mt-1 leading-relaxed">' + mv.decisionPoint + '</h3>' +
+                    '</div>' +
+                    '<div class="grid grid-cols-1 md:grid-cols-3 gap-4">' + branchesHtml + '</div>' +
+                '</div>';
+        }
+
+        function exploreMultiverseBranch(branchId) {
+            const firstTime = !appState.multiverseExplored.includes(branchId);
+            if (firstTime) {
+                appState.multiverseExplored.push(branchId);
+                saveStateToStorage();
+                addEnergy(15, '探索劇情異世界分支結局');
+            }
+            renderMultiverseSection();
+        }
+
+        function renderWorkshopSection() {
+            const d = appState.workshopDraft;
+            const container = document.getElementById('workshop-container');
+
+            const deckHtml = Object.keys(WORKSHOP_DECK).map(function(deckKey) {
+                const deck = WORKSHOP_DECK[deckKey];
+                const currentCard = d.cards[deckKey] || deck.cards[0];
+                const optionsHtml = deck.cards.map(function(c) {
+                    return '<option value="' + c.id + '" ' + (c.id === currentCard.id ? 'selected' : '') + '>' + c.name + '</option>';
+                }).join('');
+
+                return '<div class="oriental-card rounded-2xl p-4 flex flex-col justify-between border-t-4 ' + deck.color + '">' +
+                    '<div class="space-y-2">' +
+                        '<div class="flex items-center justify-between">' +
+                            '<span class="text-xs font-serif font-bold flex items-center gap-1"><span>' + deck.icon + '</span> ' + deck.label + '</span>' +
+                            '<button type="button" onclick="drawSingleWorkshopCard(\'' + deckKey + '\')" class="text-[11px] px-2 py-0.5 rounded bg-night-950 hover:bg-night-800 text-gold-400 border border-gold-500/30">🎲 換一張</button>' +
+                        '</div>' +
+                        '<select onchange="selectWorkshopCardManual(\'' + deckKey + '\', this.value)" class="w-full bg-night-950 text-parchment-50 font-serif font-bold text-xs sm:text-sm p-2 rounded-lg border border-gold-500/30 focus:outline-none">' +
+                            optionsHtml +
+                        '</select>' +
+                        '<p class="text-xs text-parchment-200/80 leading-relaxed pt-1">💡 靈感提示：' + currentCard.hint + '</p>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+
+            container.innerHTML =
+                '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">' + deckHtml + '</div>' +
+                '<div class="oriental-card rounded-2xl p-5 sm:p-6 space-y-5">' +
+                    '<div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold-500/30 pb-4">' +
+                        '<div>' +
+                            '<h3 class="font-serif font-bold text-lg text-gold-400">✍️ 故事山五階段創作卷軸</h3>' +
+                            '<p class="text-xs text-parchment-200/75">所有輸入內容皆會自動保存於草稿中，也可點擊「帶入靈感範本」快速改寫！</p>' +
+                        '</div>' +
+                        '<button type="button" onclick="fillWorkshopSampleTemplate()" class="px-3.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-bold transition">✨ 帶入靈感引導範本</button>' +
+                    '</div>' +
+                    '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+                        '<div>' +
+                            '<label class="block text-xs font-bold text-gold-400 mb-1">故事標題</label>' +
+                            '<input type="text" id="ws-title-input" value="' + escapeHtml(d.title) + '" oninput="updateWorkshopDraftField(\'title\', this.value)" placeholder="例如：《西湖古傘奇緣》或《定伯智破畫皮鎮》" class="w-full bg-night-950 text-parchment-50 px-3.5 py-2.5 rounded-xl border border-gold-500/30 text-sm">' +
+                        '</div>' +
+                        '<div>' +
+                            '<label class="block text-xs font-bold text-gold-400 mb-1">創作者姓名／筆名</label>' +
+                            '<input type="text" id="ws-author-input" value="' + escapeHtml(d.author || (appState.userProfile ? appState.userProfile.name : '') || '') + '" oninput="updateWorkshopDraftField(\'author\', this.value)" placeholder="請輸入你的姓名或筆名" class="w-full bg-night-950 text-parchment-50 px-3.5 py-2.5 rounded-xl border border-gold-500/30 text-sm">' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="space-y-4">' +
+                        '<div>' +
+                            '<label class="block text-xs font-bold text-jade-400 mb-1">① 開端（介紹主角、場景與事件起因）</label>' +
+                            '<textarea rows="2" oninput="updateWorkshopStage(\'beginning\', this.value)" placeholder="在什麼時間與地點，主角遇見了什麼奇特的人事物？" class="w-full bg-night-950 text-parchment-50 p-3 rounded-xl border border-gold-500/30 text-xs sm:text-sm">' + escapeHtml(d.stages.beginning) + '</textarea>' +
+                        '</div>' +
+                        '<div>' +
+                            '<label class="block text-xs font-bold text-jade-400 mb-1">② 發展（遭遇困難、考驗或發現線索）</label>' +
+                            '<textarea rows="2" oninput="updateWorkshopStage(\'development\', this.value)" placeholder="主角在過程中遇到了什麼阻礙或試探？他如何應對？" class="w-full bg-night-950 text-parchment-50 p-3 rounded-xl border border-gold-500/30 text-xs sm:text-sm">' + escapeHtml(d.stages.development) + '</textarea>' +
+                        '</div>' +
+                        '<div>' +
+                            '<label class="block text-xs font-bold text-rose-400 mb-1">③ 高潮（結合轉折卡，發生最緊張精彩的對決或真相揭曉）</label>' +
+                            '<textarea rows="2" oninput="updateWorkshopStage(\'climax\', this.value)" placeholder="關鍵時刻發生了什麼意想不到的轉折？主角如何化解危機？" class="w-full bg-night-950 text-parchment-50 p-3 rounded-xl border border-gold-500/30 text-xs sm:text-sm">' + escapeHtml(d.stages.climax) + '</textarea>' +
+                        '</div>' +
+                        '<div>' +
+                            '<label class="block text-xs font-bold text-amber-400 mb-1">④ 結局（事件落幕與人物的改變）</label>' +
+                            '<textarea rows="2" oninput="updateWorkshopStage(\'ending\', this.value)" placeholder="最後事情如何解決？主角與夥伴們迎來什麼樣的結局？" class="w-full bg-night-950 text-parchment-50 p-3 rounded-xl border border-gold-500/30 text-xs sm:text-sm">' + escapeHtml(d.stages.ending) + '</textarea>' +
+                        '</div>' +
+                        '<div>' +
+                            '<label class="block text-xs font-bold text-purple-300 mb-1">⑤ 主題與省思（這篇故事想傳達的核心道理）</label>' +
+                            '<textarea rows="2" oninput="updateWorkshopStage(\'theme\', this.value)" placeholder="透過這個故事，你想告訴讀者什麼關於智慧、勇氣、善意或誠信的啟示？" class="w-full bg-night-950 text-parchment-50 p-3 rounded-xl border border-gold-500/30 text-xs sm:text-sm">' + escapeHtml(d.stages.theme) + '</textarea>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="pt-2">' +
+                        '<button type="button" onclick="generateCreationCard()" class="btn-game w-full bg-gradient-to-r from-gold-500 to-amber-600 text-night-950 font-serif font-black py-3.5 px-6 rounded-xl text-sm sm:text-base flex items-center justify-center gap-2">' +
+                            '<i class="ph-fill ph-sparkle text-xl"></i><span>完成創作！生成古風故事成果卡並領取回饋 (+80能量)</span>' +
+                        '</button>' +
+                    '</div>' +
+                '</div>' +
+                '<div id="workshop-latest-output">' +
+                    (appState.savedCreations.length > 0 ? renderCreationResultCard(appState.savedCreations[0]) : '') +
+                '</div>';
+        }
+
+        function drawSingleWorkshopCard(deckKey) {
+            const cards = WORKSHOP_DECK[deckKey].cards;
+            const currentId = appState.workshopDraft.cards[deckKey] ? appState.workshopDraft.cards[deckKey].id : '';
+            const others = cards.filter(function(c) { return c.id !== currentId; });
+            appState.workshopDraft.cards[deckKey] = others[Math.floor(Math.random() * others.length)];
+            saveStateToStorage();
+            renderWorkshopSection();
+        }
+
+        function drawAllWorkshopCards() {
+            Object.keys(WORKSHOP_DECK).forEach(function(k) {
+                const cards = WORKSHOP_DECK[k].cards;
+                appState.workshopDraft.cards[k] = cards[Math.floor(Math.random() * cards.length)];
+            });
+            saveStateToStorage();
+            renderWorkshopSection();
+            showToast('🎲 已隨機抽出四張全新靈感卡！', 'gold');
+        }
+
+        function selectWorkshopCardManual(deckKey, cardId) {
+            const found = WORKSHOP_DECK[deckKey].cards.find(function(c) { return c.id === cardId; });
+            if (found) {
+                appState.workshopDraft.cards[deckKey] = found;
+                saveStateToStorage();
+                renderWorkshopSection();
+            }
+        }
+
+        function updateWorkshopDraftField(field, val) {
+            appState.workshopDraft[field] = val;
+            saveStateToStorage();
+        }
+
+        function updateWorkshopStage(stageKey, val) {
+            appState.workshopDraft.stages[stageKey] = val;
+            saveStateToStorage();
+        }
+
+        function fillWorkshopSampleTemplate() {
+            const c = appState.workshopDraft.cards;
+            appState.workshopDraft.title = '《' + c.scene.name.slice(0, 4) + '奇遇記》';
+            if (!appState.workshopDraft.author) {
+                appState.workshopDraft.author = (appState.userProfile && appState.userProfile.name) ? appState.userProfile.name : '鬼話小作家';
+            }
+            appState.workshopDraft.stages = {
+                beginning: '在' + c.scene.name + '，' + c.character.name + '正獨自前行，不料卻遇上了奇事：' + c.event.name + '。',
+                development: '面對突如其來的考驗，主角保持冷靜，仔細觀察周遭的蛛絲馬跡，並沒有被表面的假象迷惑。',
+                climax: '正當危機逼近時，意想不到的轉折發生了——' + c.twist.name + '！主角結合夥伴的力量與機智，一舉化解難關。',
+                ending: '風波平息後，受困的生靈獲得解救，主角帶著珍貴的體悟繼續踏上下一段旅程。',
+                theme: '面對未知與誘惑時，唯有秉持善良本心、冷靜智慧與團隊互信，才能看穿表象、化險為夷。'
+            };
+            saveStateToStorage();
+            renderWorkshopSection();
+            showToast('✨ 已帶入靈感引導範本，歡迎自由修改擴寫！', 'jade');
+        }
+
+        function generateCreationCard() {
+            const d = appState.workshopDraft;
+            const s = d.stages;
+            if (!s.beginning.trim() || !s.development.trim() || !s.climax.trim() || !s.ending.trim()) {
+                showToast('✍️ 請至少填寫「開端、發展、高潮、結局」四個階段的內容喔！', 'cinnabar');
+                return;
+            }
+
+            const totalChars = (s.beginning + s.development + s.climax + s.ending + s.theme).length;
+            const newCreation = {
+                id: 'work_' + Date.now(),
+                title: d.title.trim() || '《無題奇幻傳奇》',
+                author: d.author.trim() || (appState.userProfile ? appState.userProfile.name : '') || '鬼話冒險者',
+                createdAt: new Date().toLocaleString('zh-TW', { hour12: false }),
+                cards: { ...d.cards },
+                stages: { ...s },
+                charCount: totalChars,
+                comment: totalChars >= 120
+                    ? '🌟 情節鋪陳細膩完整，巧妙融合了四張靈感卡元素，結構層次分明，頗具古典名家風範！'
+                    : '✨ 故事山五階段架構清楚，成功將抽卡靈感化為完整的奇幻故事！'
+            };
+
+            appState.savedCreations.unshift(newCreation);
+            saveStateToStorage();
+            addEnergy(80, '完成鬼話創作工坊原創故事');
+            renderWorkshopSection();
+        }
+
+        function renderCreationResultCard(work) {
+            return '<div class="parchment-panel rounded-3xl p-6 sm:p-8 space-y-5 border-4 border-amber-700">' +
+                '<div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-amber-800/30 pb-4">' +
+                    '<div>' +
+                        '<span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-900 text-gold-400">📜 鬼話原創故事成果卷軸</span>' +
+                        '<h3 class="font-serif font-black text-2xl text-parchment-900 mt-1">' + escapeHtml(work.title) + '</h3>' +
+                        '<p class="text-xs text-amber-900 font-bold">作者：' + escapeHtml(work.author) + ' ｜ 完成時間：' + work.createdAt + ' ｜ 字數：' + work.charCount + ' 字</p>' +
+                    '</div>' +
+                    '<button type="button" onclick="copyWorkToClipboard(\'' + work.id + '\')" class="btn-game bg-amber-800 hover:bg-amber-700 text-parchment-50 font-serif font-bold px-4 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-1.5">' +
+                        '<i class="ph-bold ph-copy"></i><span>複製故事全文</span>' +
+                    '</button>' +
+                '</div>' +
+                '<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">' +
+                    '<div class="bg-amber-900/10 p-2 rounded-lg border border-amber-800/20"><strong>👤 人物：</strong>' + escapeHtml(work.cards.character.name) + '</div>' +
+                    '<div class="bg-amber-900/10 p-2 rounded-lg border border-amber-800/20"><strong>🏯 場景：</strong>' + escapeHtml(work.cards.scene.name) + '</div>' +
+                    '<div class="bg-amber-900/10 p-2 rounded-lg border border-amber-800/20"><strong>📜 事件：</strong>' + escapeHtml(work.cards.event.name) + '</div>' +
+                    '<div class="bg-amber-900/10 p-2 rounded-lg border border-amber-800/20"><strong>⚡ 轉折：</strong>' + escapeHtml(work.cards.twist.name) + '</div>' +
+                '</div>' +
+                '<div class="space-y-2.5 text-sm text-parchment-900 leading-relaxed bg-white/70 p-4 rounded-2xl border border-amber-800/25">' +
+                    '<p><strong>【開端】</strong>' + escapeHtml(work.stages.beginning) + '</p>' +
+                    '<p><strong>【發展】</strong>' + escapeHtml(work.stages.development) + '</p>' +
+                    '<p><strong>【高潮】</strong>' + escapeHtml(work.stages.climax) + '</p>' +
+                    '<p><strong>【結局】</strong>' + escapeHtml(work.stages.ending) + '</p>' +
+                    (work.stages.theme ? '<p class="pt-1 border-t border-amber-800/20 text-amber-950"><strong>💡【主題省思】</strong>' + escapeHtml(work.stages.theme) + '</p>' : '') +
+                '</div>' +
+                '<div class="bg-amber-900/15 p-3.5 rounded-xl border border-amber-800/30 text-xs sm:text-sm text-parchment-900">' +
+                    '<strong>🎓 系統講評回饋：</strong>' + work.comment +
+                '</div>' +
+            '</div>';
+        }
+
+        function copyWorkToClipboard(workId) {
+            const w = appState.savedCreations.find(function(x) { return x.id === workId; });
+            if (!w) return;
+            const text = w.title + '\n作者：' + w.author + '\n【靈感卡】' + w.cards.character.name + '｜' + w.cards.scene.name + '｜' + w.cards.event.name + '｜' + w.cards.twist.name + '\n\n【開端】' + w.stages.beginning + '\n【發展】' + w.stages.development + '\n【高潮】' + w.stages.climax + '\n【結局】' + w.stages.ending + '\n【主題省思】' + w.stages.theme;
+
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast('📋 已將完整故事複製到剪貼簿！', 'jade');
+        }
+
+        function openWorkshopResetModal() {
+            document.getElementById('workshop-reset-modal').classList.remove('hidden');
+        }
+
+        function closeWorkshopResetModal() {
+            document.getElementById('workshop-reset-modal').classList.add('hidden');
+        }
+
+        function confirmWorkshopReset() {
+            appState.workshopDraft.title = '';
+            appState.workshopDraft.stages = { beginning: '', development: '', climax: '', ending: '', theme: '' };
+            drawAllWorkshopCards();
+            closeWorkshopResetModal();
+            renderWorkshopSection();
+        }
+
+        function renderAchievementsSection() {
+            const container = document.getElementById('achievements-container');
+            const badgesHtml = BADGES_CONFIG.map(function(b) {
+                const unlocked = appState.unlockedBadges.includes(b.id);
+                return '<div class="p-4 rounded-xl border transition flex items-start gap-3 ' + (unlocked ? 'bg-night-900 border-gold-500/60 shadow-md' : 'bg-night-950/40 border-white/10 opacity-50') + '">' +
+                    '<div class="text-3xl shrink-0">' + (unlocked ? b.icon : '🔒') + '</div>' +
+                    '<div>' +
+                        '<h4 class="font-serif font-bold text-sm ' + (unlocked ? 'text-gold-400' : 'text-parchment-200') + '">' + b.title + '</h4>' +
+                        '<p class="text-xs text-parchment-200/75 mt-0.5 leading-relaxed">' + b.desc + '</p>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+
+            const worksHtml = appState.savedCreations.length === 0
+                ? '<div class="oriental-card rounded-2xl p-8 text-center space-y-3">' +
+                    '<div class="text-4xl">✒️</div>' +
+                    '<p class="text-sm text-parchment-200">目前尚未產出原創故事成果卡，快前往「四、鬼話創作工坊」大展身手吧！</p>' +
+                    '<button type="button" onclick="switchTab(\'workshop\')" class="btn-game bg-gold-500 text-night-950 font-serif font-bold px-5 py-2 rounded-xl text-xs sm:text-sm">前往鬼話創作工坊 ➔</button>' +
+                  '</div>'
+                : appState.savedCreations.map(function(w) { return renderCreationResultCard(w); }).join('');
+
+            container.innerHTML =
+                '<div class="oriental-card rounded-2xl p-6 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">' +
+                    '<div class="p-3 rounded-xl bg-night-950/80 border border-gold-500/30">' +
+                        '<div class="text-2xl">🔥</div>' +
+                        '<div class="text-xs text-parchment-200/70 mt-1">累計鬼話能量</div>' +
+                        '<div class="text-xl font-serif font-black text-jade-400">' + appState.energy + '</div>' +
+                    '</div>' +
+                    '<div class="p-3 rounded-xl bg-night-950/80 border border-gold-500/30">' +
+                        '<div class="text-2xl">🏅</div>' +
+                        '<div class="text-xs text-parchment-200/70 mt-1">已解鎖成就徽章</div>' +
+                        '<div class="text-xl font-serif font-black text-gold-400">' + appState.unlockedBadges.length + ' / ' + BADGES_CONFIG.length + '</div>' +
+                    '</div>' +
+                    '<div class="p-3 rounded-xl bg-night-950/80 border border-gold-500/30">' +
+                        '<div class="text-2xl">⛰️</div>' +
+                        '<div class="text-xs text-parchment-200/70 mt-1">故事山攀登完成</div>' +
+                        '<div class="text-xl font-serif font-black text-amber-400">' + Object.values(appState.mountainCleared).filter(Boolean).length + ' / 6</div>' +
+                    '</div>' +
+                    '<div class="p-3 rounded-xl bg-night-950/80 border border-gold-500/30">' +
+                        '<div class="text-2xl">✒️</div>' +
+                        '<div class="text-xs text-parchment-200/70 mt-1">原創故事作品數</div>' +
+                        '<div class="text-xl font-serif font-black text-purple-300">' + appState.savedCreations.length + ' 篇</div>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="oriental-card rounded-2xl p-5 sm:p-6 space-y-4">' +
+                    '<h3 class="font-serif font-bold text-lg text-gold-400">🏆 榮譽成就徽章牆</h3>' +
+                    '<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">' + badgesHtml + '</div>' +
+                '</div>' +
+                '<div class="space-y-4">' +
+                    '<h3 class="font-serif font-bold text-lg text-gold-400 px-1">📚 我的鬼話原創作品集 (' + appState.savedCreations.length + ')</h3>' +
+                    worksHtml +
+                '</div>';
+        }
+
+        function showToast(message, theme) {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            const colorMap = {
+                gold: 'bg-night-900 border-gold-400 text-gold-300',
+                jade: 'bg-night-900 border-jade-400 text-jade-300',
+                cinnabar: 'bg-night-900 border-cinnabar-500 text-rose-300'
+            };
+            toast.className = 'pointer-events-auto px-4 py-3 rounded-xl border-2 shadow-2xl text-xs sm:text-sm font-bold flex items-center justify-between gap-2 transition-all duration-300 ' + (colorMap[theme] || colorMap.gold);
+            toast.innerHTML = '<span>' + message + '</span>';
+            container.appendChild(toast);
+            setTimeout(function() {
+                toast.style.opacity = '0';
+                setTimeout(function() { toast.remove(); }, 300);
+            }, 3200);
+        }
+
+        function openStorageModal() {
+            document.getElementById('storage-modal').classList.remove('hidden');
+        }
+
+        function closeStorageModal() {
+            document.getElementById('storage-modal').classList.add('hidden');
+        }
+
+        function resetAllProgress() {
+            localStorage.removeItem(STORAGE_KEY);
+            location.reload();
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        window.onload = function() {
+            loadStateFromStorage();
+            ensureBgmAudioBound();
+            initMountainSession(appState.activeMountainStoryId);
+            updateHeaderStatus();
+            goToLandingView();
+
+            const loginNameEl = document.getElementById('login-name-input');
+            if (loginNameEl) {
+                loginNameEl.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        handleUserLogin();
+                    }
+                });
+            }
+        };
+    </script>
+</body>
+</html>
